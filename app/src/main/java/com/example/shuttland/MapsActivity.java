@@ -8,8 +8,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+
+//import android.support.v4.app.ActivityCompat;
+//import android.support.v4.app.FragmentActivity;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,16 +22,23 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.shuttland.MapsDB;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private List<Location> stations;
     Location userLocation;
-
+    DatabaseReference myRef;
+    private List<Location> stations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +47,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        stations = new ArrayList<>();
-        SetStationsLocations(stations);
+        stations = MapsDB.getInstance().getStations();
+        writeToDB();
+        readFromDB();
 
     }
 
 
+    public void writeToDB(){
+        FirebaseDatabase db =FirebaseDatabase.getInstance();
+        myRef=db.getReference("tyr");
+        myRef.setValue("hiiiii!!");
+    }
+
+    public void readFromDB(){
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.v("key", "Value is: " + value);
+                //System.out.println("********** "+value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.v("error", "Failed to read value.", error.toException());
+            }
+        });
+    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -58,7 +96,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double latitude=location.getLatitude();
                 double longitude=location.getLongitude();
                 String msg="New Latitude: "+latitude + "New Longitude: "+longitude;
-                System.out.println(msg);
             }
 
             @Override
@@ -129,34 +166,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         return closestLocation;
-    }
-
-    public void SetStationsLocations(List stations) {
-        addLocation("0", 32.0727493, 34.849301);
-        addLocation("1", 32.0734411, 34.8483981);
-        addLocation("2", 32.0735301, 34.846368);
-        addLocation("3", 32.0723118, 34.844318799999996);
-        addLocation("4", 32.071165199999996, 34.8429532);
-        addLocation("5", 32.069904, 34.8420564);
-        addLocation("6", 32.0681564, 34.840918099999996);
-        addLocation("7", 32.0671975, 34.840333699999995);
-        addLocation("8", 32.0655436, 34.8424443);
-        addLocation("9", 32.0659431, 34.844034199999996);
-        addLocation("10", 32.0673506, 34.8446212);
-        addLocation("11", 32.069542, 34.8438793);
-        addLocation("12", 32.0695559, 34.8423678);
-        addLocation("13", 32.0711751, 34.8430622);
-        addLocation("14", 32.0722382, 34.8445136);
-        addLocation("15", 32.073458699999996, 34.8459821);
-        addLocation("16", 32.072267499999995, 34.8480397);
-    }
-
-
-    public void addLocation(String name, double lat, double lon) {
-        Location location = new Location(name);
-        location.setLatitude(lat);
-        location.setLongitude(lon);
-        stations.add(location);
     }
 
     private void checkPermission() {
