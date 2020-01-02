@@ -8,8 +8,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.ActivityCompat;
+//import android.support.v4.app.FragmentActivity;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -88,10 +91,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        //Location userLocation = new Location("user");
-        //userLocation.setLatitude(userLocation.getLatitude());
-        //userLocation.setLongitude(userLocation.getLongitude());
-        Location nearestStation = findNearestStation(location);
+        Location userLocation = new Location("user");
+        userLocation.setLatitude(32.069267);
+        userLocation.setLongitude(34.843128);
+
+        Location nearestStation = findNearestStation(userLocation);
 
 
         LatLng latLng = new LatLng(nearestStation.getLatitude(), nearestStation.getLongitude());
@@ -104,7 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        System.out.println("---------------------------------");
 
 
-        String strUri = "http://maps.google.com/maps?saddr=" + location.getLatitude() + "," + location.getLongitude()
+        String strUri = "http://maps.google.com/maps?saddr=" + userLocation.getLatitude() + "," + userLocation.getLongitude()
                 + "&daddr=" + nearestStation.getLatitude() + "," + nearestStation.getLongitude();
 
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
