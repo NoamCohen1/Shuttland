@@ -56,8 +56,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void writeToDB(){
         FirebaseDatabase db =FirebaseDatabase.getInstance();
-        myRef=db.getReference("tyr");
-        myRef.setValue("hiiiii!!");
+        myRef=db.getReference("1");
+        myRef.setValue("32.545342,34.02832,true");
     }
 
     public void readFromDB(){
@@ -69,7 +69,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 Log.v("key", "Value is: " + value);
-                //System.out.println("********** "+value);
+                System.out.println("********** "+value);
+                String[] location_point=value.split(",");
+                double lon=Double.parseDouble(location_point[0]);
+                boolean b=Boolean.parseBoolean(location_point[2]);
+                Shuttle_Info info=new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]),Double.parseDouble(location_point[1]))
+                        ,Boolean.parseBoolean(location_point[2]));
+                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()),info);
+                int i=0;
             }
 
             @Override
