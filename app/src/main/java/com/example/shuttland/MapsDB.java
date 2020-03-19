@@ -3,6 +3,7 @@ package com.example.shuttland;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,16 +11,17 @@ import java.util.Map;
 public class MapsDB {
 
 
-    private Map<String, Float> distances;
+    private List<Float> distance_of_station = new ArrayList<>();
     private List<Location> stations = new ArrayList<>();
     private static MapsDB single_instance = null;
 
-    private MapsDB(){
+    private MapsDB() {
         SetStationsLocations();
+        setStationsDistances();
     }
+
     // static method to create instance of Singleton class
-    public static MapsDB getInstance()
-    {
+    public static MapsDB getInstance() {
         if (single_instance == null) {
             single_instance = new MapsDB();
         }
@@ -29,23 +31,40 @@ public class MapsDB {
 
 
     public void setStationsDistances() {
-        distances.put("0->1", Float.valueOf("127"));
-        distances.put("1->2", Float.valueOf("200"));
-        distances.put("2->3", Float.valueOf("279"));
-        distances.put("3->4", Float.valueOf("190"));
-        distances.put("4->5", Float.valueOf("160"));
-        distances.put("5->6", Float.valueOf("230"));
-        distances.put("6->7", Float.valueOf("120"));
-        distances.put("7->8", Float.valueOf("325"));
-        distances.put("8->9", Float.valueOf("160"));
-        distances.put("9->10", Float.valueOf("190"));
-        distances.put("10->11", Float.valueOf("300"));
-        distances.put("11->12", Float.valueOf("140"));
-        distances.put("12->13", Float.valueOf("247"));
-        distances.put("13->14", Float.valueOf("190"));
-        distances.put("14->15", Float.valueOf("99"));
-        distances.put("15->16", Float.valueOf("265"));
-        distances.put("16->0", Float.valueOf("168"));
+        // 0->1
+        distance_of_station.add(Float.valueOf("127"));
+        //1->2
+        distance_of_station.add( Float.valueOf("200"));
+        // 2->3
+        distance_of_station.add(Float.valueOf("279"));
+        // 3->4
+        distance_of_station.add(Float.valueOf("190"));
+        // 4->5
+        distance_of_station.add(Float.valueOf("160"));
+        // 5->6
+        distance_of_station.add(Float.valueOf("230"));
+        // 6->7
+        distance_of_station.add(Float.valueOf("120"));
+        // 7->8
+        distance_of_station.add(Float.valueOf("325"));
+        // 8->9
+        distance_of_station.add(Float.valueOf("160"));
+        // 9->10
+        distance_of_station.add(Float.valueOf("190"));
+        // 10->11
+        distance_of_station.add(Float.valueOf("300"));
+        // 11->12
+        distance_of_station.add(Float.valueOf("140"));
+        // 12->13
+        distance_of_station.add(Float.valueOf("247"));
+        // 13->14
+        distance_of_station.add(Float.valueOf("190"));
+        // 14->15
+        distance_of_station.add(Float.valueOf("99"));
+        // 15->16
+        distance_of_station.add(Float.valueOf("265"));
+        // 16->0
+        distance_of_station.add(Float.valueOf("168"));
     }
 
     public void SetStationsLocations() {
@@ -78,5 +97,9 @@ public class MapsDB {
 
     public List<Location> getStations() {
         return stations;
+    }
+
+    public List<Float> getdistance_of_station() {
+        return distance_of_station;
     }
 }

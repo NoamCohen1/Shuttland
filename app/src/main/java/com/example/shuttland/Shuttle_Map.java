@@ -35,4 +35,18 @@ public class Shuttle_Map {
     public void setMap(int shuttle_id, Shuttle_Info info) {
         this.shuttle_infoMap.put(shuttle_id, info);
     }
+
+    public Map<Integer, Shuttle_Info> getShuttle_infoMap() {
+        return shuttle_infoMap;
+    }
+
+    public Map<Integer, Shuttle_Info> getActiveShuttles() {
+        @SuppressLint("UseSparseArrays") Map<Integer, Shuttle_Info> active=new HashMap<>();
+        for (Map.Entry<Integer, Shuttle_Info> entry : Shuttle_Map.getInstance().getShuttle_infoMap().entrySet()) {
+            if(entry.getValue().isActive()) {
+                active.put(entry.getKey(), entry.getValue());
+            }
+        }
+            return active;
+    }
 }

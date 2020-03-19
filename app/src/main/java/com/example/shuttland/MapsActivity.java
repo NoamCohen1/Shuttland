@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.example.shuttland.MapsDB;
 
 
@@ -50,17 +52,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stations = MapsDB.getInstance().getStations();
         writeToDB();
         readFromDB();
+        Location loc=new Location("0");
+        loc.setLatitude(32.0723118);
+        loc.setLongitude(34.844318799999996);
+        int ans=findNearestShuttle(loc);
+        int o=9;
 
     }
 
 
-    public void writeToDB(){
-        FirebaseDatabase db =FirebaseDatabase.getInstance();
-        myRef=db.getReference("1");
-        myRef.setValue("32.545342,34.02832,true");
+    public void writeToDB() {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        myRef = db.getReference("1");
+        myRef.setValue("32.0734411, 34.8483981,true");
+        myRef = db.getReference("2");
+        myRef.setValue("32.0735301, 34.846368,true");
     }
 
-    public void readFromDB(){
+    public void readFromDB() {
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,14 +78,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 Log.v("key", "Value is: " + value);
-                System.out.println("********** "+value);
-                String[] location_point=value.split(",");
-                double lon=Double.parseDouble(location_point[0]);
-                boolean b=Boolean.parseBoolean(location_point[2]);
-                Shuttle_Info info=new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]),Double.parseDouble(location_point[1]))
-                        ,Boolean.parseBoolean(location_point[2]));
-                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()),info);
-                int i=0;
+                System.out.println("********** " + value);
+                String[] location_point = value.split(",");
+                double lon = Double.parseDouble(location_point[0]);
+                boolean b = Boolean.parseBoolean(location_point[2]);
+                Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
+                        , Boolean.parseBoolean(location_point[2]));
+                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()), info);
+                int i = 0;
             }
 
             @Override
@@ -86,6 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -100,9 +110,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     userLocation.setLatitude(location.getLatitude());
                     userLocation.setLongitude(location.getLongitude());
                 }
-                double latitude=location.getLatitude();
-                double longitude=location.getLongitude();
-                String msg="New Latitude: "+latitude + "New Longitude: "+longitude;
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                String msg = "New Latitude: " + latitude + "New Longitude: " + longitude;
             }
 
             @Override
@@ -121,15 +131,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
         };
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location location = null;
-        for ( String provider : lm.getProviders(true) ) {
-            location =  lm.getLastKnownLocation(provider);
+        for (String provider : lm.getProviders(true)) {
+            location = lm.getLastKnownLocation(provider);
             lm.requestLocationUpdates(provider, 3000, 0, locationListener);
         }
         //3 seconds and 10 meters
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 10, locationListener);
-
 
 
         //Location userLocation = new Location("user");
@@ -173,6 +182,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         return closestLocation;
+    }
+
+    public float distance_shuttle(Location station_location, Location shuttle_location) {
+        int numStation = Integer.parseInt(station_location.getProvider());
+        Location nearest_station_location = findNearestStation(shuttle_location);
+        int nearest_station_name = Integer.parseInt(nearest_station_location.getProvider());
+        float distance = nearest_station_location.distanceTo(shuttle_location);
+        if (nearest_station_name > numStation)
+            return Float.MAX_VALUE;
+        for (int i = nearest_station_name; i < numStation; i++) {
+            distance += MapsDB.getInstance().getdistance_of_station().get(i);
+        }
+        return distance;
+    }
+
+    public int findNearestShuttle(Location station_location) {
+        float minDis = Float.MAX_VALUE;
+        // not valid num shuttle
+        int ans=Integer.MAX_VALUE;
+        for (Map.Entry<Integer, Shuttle_Info> entry : Shuttle_Map.getInstance().getActiveShuttles().entrySet()) {
+            Location shuttle_location=new Location("0");
+            shuttle_location.setLongitude(entry.getValue().getLocation().longitude);
+            shuttle_location.setLatitude(entry.getValue().getLocation().latitude);
+            float temp_distance=distance_shuttle(station_location,shuttle_location);
+            if (temp_distance < minDis) {
+                minDis = temp_distance;
+                ans=entry.getKey();
+            }
+        }
+        return ans;
     }
 
     private void checkPermission() {
