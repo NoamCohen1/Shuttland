@@ -10,9 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-//import android.support.v4.app.ActivityCompat;
-//import android.support.v4.app.FragmentActivity;
-
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -28,11 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.shuttland.MapsDB;
+//import android.support.v4.app.ActivityCompat;
+//import android.support.v4.app.FragmentActivity;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -52,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         stations = MapsDB.getInstance().getStations();
         writeToDB();
         readFromDB();
-        Location loc=new Location("0");
+        Location loc=new Location("3");
         loc.setLatitude(32.0723118);
         loc.setLongitude(34.844318799999996);
         int ans=findNearestShuttle(loc);
@@ -197,6 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return distance;
     }
 
+    // - צריך להחזיר 10 דקות(לבדוק) + הזמן מתחנה 0 עד אליו אם מחזיר  MAX INT
     public int findNearestShuttle(Location station_location) {
         float minDis = Float.MAX_VALUE;
         // not valid num shuttle

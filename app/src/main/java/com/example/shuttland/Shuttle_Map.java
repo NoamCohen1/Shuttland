@@ -1,13 +1,10 @@
 package com.example.shuttland;
 
 import android.annotation.SuppressLint;
-import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Shuttle_Map {
@@ -22,7 +19,12 @@ public class Shuttle_Map {
         for (int i = 0; i < num_shuttle; i++) {
             shuttle_infoMap.put(i, new Shuttle_Info());
         }
+        Shuttle_Info info = new Shuttle_Info(new LatLng(32.0734411, 34.8483981), true);
+        shuttle_infoMap.put(1, info);
+        info = new Shuttle_Info(new LatLng(32.0735301, 34.846368),true);
+        shuttle_infoMap.put(2, info);
     }
+
 
     public static Shuttle_Map getInstance() {
         if (my_instance == null) {
@@ -33,7 +35,7 @@ public class Shuttle_Map {
     }
 
     public void setMap(int shuttle_id, Shuttle_Info info) {
-        this.shuttle_infoMap.put(shuttle_id, info);
+        Shuttle_Map.getInstance().shuttle_infoMap.put(shuttle_id, info);
     }
 
     public Map<Integer, Shuttle_Info> getShuttle_infoMap() {
@@ -47,6 +49,6 @@ public class Shuttle_Map {
                 active.put(entry.getKey(), entry.getValue());
             }
         }
-            return active;
+        return active;
     }
 }

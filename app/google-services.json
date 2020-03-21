@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "207185362852-34nkg81tj3aji9r00m2fmgdu27c80cki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shuttland",
+            "certificate_hash": "2f4d61401d613e34708bb6ad891cfdc832406342"
+          }
+        },
+        {
           "client_id": "207185362852-hj3rdghh78463pmcnhgo3gtjfeiigjc9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
