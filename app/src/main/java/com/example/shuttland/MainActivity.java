@@ -15,17 +15,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        button = (Button) findViewById(R.id.nearStation);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivity2();
+                openActivityNearStation();
+            }
+        });
+        button = (Button) findViewById(R.id.navigation);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openActivityNavigation();
             }
         });
     }
 
-    public void openActivity2() {
+    public void openActivityNearStation() {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void openActivityNavigation() {
+        Intent intent = new Intent(this, NavigationActivity.class);
         startActivity(intent);
     }
 
