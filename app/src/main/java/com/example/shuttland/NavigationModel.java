@@ -46,7 +46,7 @@ public class NavigationModel {
         // not valid num shuttle
         int ans=Integer.MAX_VALUE;
         for (Map.Entry<Integer, Shuttle_Info> entry : Shuttle_Map.getInstance().getActiveShuttles().entrySet()) {
-            Location shuttle_location=new Location("0");
+            Location shuttle_location = new Location("0");
             shuttle_location.setLongitude(entry.getValue().getLocation().longitude);
             shuttle_location.setLatitude(entry.getValue().getLocation().latitude);
             float temp_distance=distance_shuttle(station_location,shuttle_location);
