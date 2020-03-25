@@ -13,11 +13,14 @@ public class MapsDB {
 
     private List<Float> distance_of_station = new ArrayList<>();
     private List<Location> stations = new ArrayList<>();
+    private Map<Integer, Integer> building_to_near_station;
     private static MapsDB single_instance = null;
 
     private MapsDB() {
         SetStationsLocations();
         setStationsDistances();
+        building_to_near_station = new HashMap<>();
+        setBuildingToNearStation();
     }
 
     // static method to create instance of Singleton class
@@ -87,6 +90,84 @@ public class MapsDB {
         addLocation("16", 32.072267499999995, 34.8480397);
     }
 
+    public void setBuildingToNearStation() {
+        building_to_near_station.put(100, 8);
+        building_to_near_station.put(101, 7);
+        building_to_near_station.put(102, 7);
+        building_to_near_station.put(103, 7);
+        building_to_near_station.put(104, 7);
+        building_to_near_station.put(105, 8);
+        building_to_near_station.put(106, 8);
+        building_to_near_station.put(107, 8);
+        building_to_near_station.put(108, 8);
+        building_to_near_station.put(109, 8);
+        building_to_near_station.put(201, 7);
+        building_to_near_station.put(202, 7);
+        building_to_near_station.put(203, 7);
+        building_to_near_station.put(204, 7);
+        building_to_near_station.put(205, 7);
+        building_to_near_station.put(206, 7);
+        building_to_near_station.put(207, 7);
+        building_to_near_station.put(208, 7);
+        building_to_near_station.put(209, 7);
+        building_to_near_station.put(211, 6);
+        building_to_near_station.put(212, 6);
+        building_to_near_station.put(213, 6);
+        building_to_near_station.put(214, 6);
+        building_to_near_station.put(215, 6);
+        building_to_near_station.put(216, 6);
+        building_to_near_station.put(217, 12);
+        building_to_near_station.put(300, 9);
+        building_to_near_station.put(301, 9);
+        building_to_near_station.put(302, 9);
+        building_to_near_station.put(303, 9);
+        building_to_near_station.put(304, 9);
+        building_to_near_station.put(305, 10);
+        building_to_near_station.put(306, 10);
+        building_to_near_station.put(307, 9);
+        building_to_near_station.put(401, 10);
+        building_to_near_station.put(402, 10);
+        building_to_near_station.put(403, 10);
+        building_to_near_station.put(404, 10);
+        building_to_near_station.put(405, 10);
+        building_to_near_station.put(406, 10);
+        building_to_near_station.put(407, 10);
+        building_to_near_station.put(408, 12);
+        building_to_near_station.put(409, 12);
+        building_to_near_station.put(410, 11);
+        building_to_near_station.put(411, 11);
+        building_to_near_station.put(501, 12);
+        building_to_near_station.put(502, 13);
+        building_to_near_station.put(503, 11);
+        building_to_near_station.put(504, 11);
+        building_to_near_station.put(505, 14);
+        building_to_near_station.put(506, 14);
+        building_to_near_station.put(507, 14);
+        building_to_near_station.put(508, 13);
+        //add - the cube
+        building_to_near_station.put(509, 14);
+        building_to_near_station.put(604, 11);
+        building_to_near_station.put(605, 11);
+        building_to_near_station.put(801, 14); //3 - depend from where he come from? *
+        building_to_near_station.put(802, 14); //*3
+        building_to_near_station.put(901, 15); //*2
+        building_to_near_station.put(902, 15); //*2
+        building_to_near_station.put(905, 15); //*2
+        building_to_near_station.put(906, 15); //*2
+        building_to_near_station.put(1002, 15); //*2
+        building_to_near_station.put(1004, 15); //*2
+        building_to_near_station.put(1005, 15); //*2
+        building_to_near_station.put(1102, 0);
+        building_to_near_station.put(1103, 0);
+        building_to_near_station.put(1104, 0);
+        building_to_near_station.put(1105, 0);
+        building_to_near_station.put(1401, 16);
+        building_to_near_station.put(1501, 16);
+        building_to_near_station.put(1502, 15); //*2
+
+
+
+    }
 
     public void addLocation(String name, double lat, double lon) {
         Location location = new Location(name);
