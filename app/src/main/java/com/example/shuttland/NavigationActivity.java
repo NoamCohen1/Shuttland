@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,8 +45,6 @@ import com.google.firebase.database.ValueEventListener;
 public class NavigationActivity extends AppCompatActivity {
     DatabaseReference myRef;
     private NavigationModel model;
-    int PERMISSION_ID = 44;
-    FusedLocationProviderClient mFusedLocationClient;
     Location userLocation = new Location("user");
     int selectedBuilding;
 
@@ -55,8 +54,14 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        Spinner staticSpinner = (Spinner) findViewById(R.id.static_spinner);
+        Button goButton = (Button) findViewById(R.id.nearStation);
+        goButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRootActivity();
+            }
+        });
+        Spinner staticSpinner = (Spinner) findViewById(R.id.target);
 
         // Create an ArrayAdapter using the string array and a default spinner
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
@@ -99,6 +104,7 @@ public class NavigationActivity extends AppCompatActivity {
         loc.setLongitude(34.844318799999996);
         userLocation=getUserLocation();
         int ans=this.model.findNearestShuttle(loc);
+
         int o=9;
     }
 
@@ -185,7 +191,15 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void openRootActivity() {
+        Intent intent = new Intent(this, RouteActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putDouble("lat",userLocation.getLatitude());
+        bundle.putDouble("lon",userLocation.getLongitude());
+        bundle.putInt("numBuilding",selectedBuilding);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
 
 
