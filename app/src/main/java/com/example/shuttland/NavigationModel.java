@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class NavigationModel {
     private List<Location> stations;
+    // 15 km/h -> 250 metres per minute (15 * 1000 / 60)
+    private final static int avarage_velocity = 250;
 
     public NavigationModel() {
         this.stations =  MapsDB.getInstance().getStations();
@@ -57,4 +59,10 @@ public class NavigationModel {
         }
         return ans;
     }
+
+    public int calcTime(Location station_location, Location shuttle_location) {
+        float distance = distance_shuttle(station_location, shuttle_location);
+        return (int) distance / avarage_velocity;
+    }
+
 }

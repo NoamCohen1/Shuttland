@@ -10,7 +10,7 @@ import java.util.Map;
 public class Shuttle_Map {
 
     private Map<Integer, Shuttle_Info> shuttle_infoMap;
-    final static int num_shuttle = 7;
+    private final static int num_shuttle = 7;
     private static Shuttle_Map my_instance = null;
 
     @SuppressLint("UseSparseArrays")
