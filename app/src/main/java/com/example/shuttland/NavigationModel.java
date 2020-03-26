@@ -65,4 +65,6 @@ public class NavigationModel {
         return (int) distance / avarage_velocity;
     }
 
+
+
 }

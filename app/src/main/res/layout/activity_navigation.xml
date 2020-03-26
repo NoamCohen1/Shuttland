@@ -7,12 +7,40 @@
     android:orientation="vertical"
     tools:context=".NavigationActivity">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="מיקומך הנוכחי" />
+
     <Spinner
         android:id="@+id/static_spinner"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_width="280dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:width="100dp"
+        android:layout_marginTop="150dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="Go" />
+
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
