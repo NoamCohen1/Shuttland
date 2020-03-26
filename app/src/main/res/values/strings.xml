@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Shuttland</string>
     <string name="title_activity_maps">Map</string>
-</resources>
+    <string-array name="building_array">
+        <item> </item>
+        <item>507</item>
+        <item>604</item>
+        <item>304</item>
+        <item>216</item>
+        <item>501</item>
+    </string-array>
+    </resources>

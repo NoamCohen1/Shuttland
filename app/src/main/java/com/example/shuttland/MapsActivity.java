@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -57,9 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     userLocation.setLatitude(location.getLatitude());
                     userLocation.setLongitude(location.getLongitude());
                 }
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                String msg = "New Latitude: " + latitude + "New Longitude: " + longitude;
             }
 
             @Override
@@ -88,9 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 10, locationListener);
 
 
-        //Location userLocation = new Location("user");
-        //userLocation.setLatitude(userLocation.getLatitude());
-        //userLocation.setLongitude(userLocation.getLongitude());
         Location nearestStation = model.findNearestStation(location);
 
 
