@@ -13,6 +13,11 @@ public class MapsDB {
 
     private List<Float> distance_of_station = new ArrayList<>();
     private List<Location> stations = new ArrayList<>();
+
+    public Map<Integer, Integer> getBuilding_to_near_station() {
+        return building_to_near_station;
+    }
+
     private Map<Integer, Integer> building_to_near_station;
     private static MapsDB single_instance = null;
 
