@@ -78,7 +78,7 @@ public class MapsDB {
     }
 
     public void setLocation_buildings(){
-        //location_buildings.put(numBuilding,Location);
+        //location_buildings.put(numBuilding,createLocation());
 
     }
 
@@ -181,13 +181,19 @@ public class MapsDB {
 
     }
 
+
     public void addLocation(String name, double lat, double lon) {
         Location location = new Location(name);
         location.setLatitude(lat);
         location.setLongitude(lon);
         stations.add(location);
     }
-
+    public Location createLocation(String name, double lat, double lon) {
+        Location location = new Location(name);
+        location.setLatitude(lat);
+        location.setLongitude(lon);
+        return location;
+}
     public List<Location> getStations() {
         return stations;
     }
