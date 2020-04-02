@@ -19,12 +19,14 @@ public class MapsDB {
     }
 
     private Map<Integer, Integer> building_to_near_station;
+    private Map<Integer, Location> location_buildings;
     private static MapsDB single_instance = null;
 
     private MapsDB() {
         SetStationsLocations();
         setStationsDistances();
         building_to_near_station = new HashMap<>();
+        location_buildings = new HashMap<>();
         setBuildingToNearStation();
     }
 
@@ -73,6 +75,11 @@ public class MapsDB {
         distance_of_station.add(Float.valueOf("265"));
         // 16->0
         distance_of_station.add(Float.valueOf("168"));
+    }
+
+    public void setLocation_buildings(){
+        //location_buildings.put(numBuilding,Location);
+
     }
 
     public void SetStationsLocations() {
