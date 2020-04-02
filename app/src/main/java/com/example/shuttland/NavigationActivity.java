@@ -82,13 +82,13 @@ public class NavigationActivity extends AppCompatActivity {
         this.model=new NavigationModel();
         writeToDB();
         readFromDB();
-        Location loc=new Location("3");
-        loc.setLatitude(32.0723118);
-        loc.setLongitude(34.844318799999996);
-        userLocation=getUserLocation();
-        int ans=this.model.findNearestShuttle(loc);
+//        Location loc=new Location("3");
+//        loc.setLatitude(32.0723118);
+//        loc.setLongitude(34.844318799999996);
+//        userLocation=getUserLocation();
+//        int ans=this.model.findNearestShuttle(loc);
 
-        int o=9;
+//        int o=9;
     }
 
 

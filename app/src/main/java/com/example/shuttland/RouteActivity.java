@@ -47,8 +47,11 @@ public class RouteActivity extends AppCompatActivity {
         shuttleLoc.setLongitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearsetShuttle).getLocation().longitude);
         int time = model.calcTime(userStation, shuttleLoc);
 
-        TextView timeText = (TextView) findViewById(R.id.time);
-        src_station.setText("השאטל יגיע בעוד  " + time + " דקות");
+        TextView timeText = (TextView) findViewById(R.id.timeShuttle);
+        timeText.setText("השאטל יגיע בעוד  " + time + " דקות");
+
+        TextView destText = (TextView) findViewById(R.id.targetStation);
+        destText.setText("סע עד תחנה "+ final_station);
 
         int i=0;
 
