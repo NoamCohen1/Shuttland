@@ -80,6 +80,35 @@ public class MapsDB {
     public void setLocation_buildings(){
         //location_buildings.put(numBuilding,createLocation());
 
+        location_buildings.put(501, createLocation("501", 32.069910, 34.842495));
+        location_buildings.put(502, createLocation("502", 32.070693, 34.843264));
+        //location_buildings.put(503, createLocation());
+        location_buildings.put(504, createLocation("504", 32.069888, 34.844179));
+        location_buildings.put(505, createLocation("505", 32.070525, 34.844453));
+        location_buildings.put(506, createLocation("506", 32.070866, 34.844837));
+        location_buildings.put(507, createLocation("507", 32.071138, 34.844493));
+        location_buildings.put(508, createLocation("508", 32.071356, 34.843863));
+        //location_buildings.put(509, createLocation());
+        location_buildings.put(604,createLocation("604", 32.070314, 34.843767));
+        location_buildings.put(605,createLocation("605", 32.070399, 34.843492));
+        location_buildings.put(801,createLocation("801",32.071479, 34.844267));
+        location_buildings.put(802,createLocation("802",32.072109, 34.844672));
+        location_buildings.put(901,createLocation("901", 32.073178, 34.845940));
+        location_buildings.put(902,createLocation("902", 32.073069, 34.846144));
+        location_buildings.put(905,createLocation("905", 32.073379, 34.845569));
+        //location_buildings.put(906,createLocation());
+        location_buildings.put(1002,createLocation("1002", 32.073830, 34.846781));
+        location_buildings.put(1004,createLocation("1004", 32.074129, 34.847459));
+        location_buildings.put(1005,createLocation("1005", 32.074205, 34.847726));
+        location_buildings.put(1102,createLocation("1102", 32.073480, 34.848892));
+        location_buildings.put(1103,createLocation("1103", 32.073345, 34.849095));
+        location_buildings.put(1104,createLocation("1104", 32.073186, 34.849227));
+        location_buildings.put(1105,createLocation("1105", 32.073000, 34.849446));
+        location_buildings.put(1401,createLocation("1401", 32.071568, 34.846642));
+        location_buildings.put(1501,createLocation("1501", 32.072930, 34.848366));
+        //location_buildings.put(1502,createLocation());
+
+
     }
 
     public void SetStationsLocations() {
@@ -156,7 +185,6 @@ public class MapsDB {
         building_to_near_station.put(506, 14);
         building_to_near_station.put(507, 14);
         building_to_near_station.put(508, 13);
-        //add - the cube
         building_to_near_station.put(509, 14);
         building_to_near_station.put(604, 11);
         building_to_near_station.put(605, 11);
