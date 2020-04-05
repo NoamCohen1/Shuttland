@@ -79,16 +79,37 @@ public class MapsDB {
 
     public void setLocation_buildings(){
         //location_buildings.put(numBuilding,createLocation());
+        location_buildings.put(216, createLocation("216", 32.068687, 34.842063));
+        location_buildings.put(217, createLocation("217", 32.069239, 34.842098));
+        location_buildings.put(300, createLocation("300", 32.066438, 34.843774)); // לא מדוייק
+        location_buildings.put(301, createLocation("301", 32.066496, 34.843614));
+        location_buildings.put(302, createLocation("302", 32.06626355141027, 34.84452401498103)); // לא מדוייק
+        location_buildings.put(303, createLocation("303", 32.0667272726008, 34.84461134180776)); // לא מדוייק
+        location_buildings.put(304, createLocation("304", 32.067390,34.842928));
+        location_buildings.put(305, createLocation("305", 32.067045, 34.844349));
+        location_buildings.put(306, createLocation("306", 32.067731, 34.844231));
+        location_buildings.put(307, createLocation("307", 32.06736328654893, 34.84280928506419));//לא מדוייק
+        location_buildings.put(401, createLocation("402", 32.068104, 34.843273));
+        location_buildings.put(402, createLocation("402", 32.068104, 34.843273));
+        location_buildings.put(403, createLocation("403", 32.068425, 34.843126));
+        location_buildings.put(404, createLocation("404", 32.068809, 34.843284));
+        location_buildings.put(405, createLocation("405", 32.068421, 34.843644));
+        location_buildings.put(406, createLocation("406", 32.068312, 34.844800));
+        location_buildings.put(407, createLocation("407", 32.068718, 34.844801));
+        location_buildings.put(408, createLocation("408", 32.068973, 34.842631));
+        location_buildings.put(409, createLocation("409", 32.069233, 34.842787));//לא מדוייק
+        location_buildings.put(410, createLocation("410", 32.069123, 34.843674));
+        location_buildings.put(411, createLocation("411", 32.068930, 34.844232));
 
         location_buildings.put(501, createLocation("501", 32.069910, 34.842495));
         location_buildings.put(502, createLocation("502", 32.070693, 34.843264));
-        //location_buildings.put(503, createLocation());
+        location_buildings.put(503, createLocation("503", 32.06972687050898, 34.84347663279368));//לא מדוייק
         location_buildings.put(504, createLocation("504", 32.069888, 34.844179));
         location_buildings.put(505, createLocation("505", 32.070525, 34.844453));
         location_buildings.put(506, createLocation("506", 32.070866, 34.844837));
         location_buildings.put(507, createLocation("507", 32.071138, 34.844493));
         location_buildings.put(508, createLocation("508", 32.071356, 34.843863));
-        //location_buildings.put(509, createLocation());
+        location_buildings.put(509, createLocation("509", 32.06972687050898, 34.84347663279368));// לא מדוייק
         location_buildings.put(604,createLocation("604", 32.070314, 34.843767));
         location_buildings.put(605,createLocation("605", 32.070399, 34.843492));
         location_buildings.put(801,createLocation("801",32.071479, 34.844267));
@@ -96,7 +117,7 @@ public class MapsDB {
         location_buildings.put(901,createLocation("901", 32.073178, 34.845940));
         location_buildings.put(902,createLocation("902", 32.073069, 34.846144));
         location_buildings.put(905,createLocation("905", 32.073379, 34.845569));
-        //location_buildings.put(906,createLocation());
+        location_buildings.put(906,createLocation("906", 32.07316932769866, 34.84633573665613));//לא מדוייק
         location_buildings.put(1002,createLocation("1002", 32.073830, 34.846781));
         location_buildings.put(1004,createLocation("1004", 32.074129, 34.847459));
         location_buildings.put(1005,createLocation("1005", 32.074205, 34.847726));
