@@ -80,17 +80,33 @@ public class MapsDB {
     public void setLocation_buildings(){
         //location_buildings.put(numBuilding,createLocation());
 
+
         location_buildings.put(100, createLocation("100", 32.065704, 34.840879));
         location_buildings.put(101, createLocation("101", 32.065874, 34.840133));
+        location_buildings.put(102, createLocation("102", 32.065997, 34.840855));
         location_buildings.put(103, createLocation("103", 32.066551, 34.840238));
+        location_buildings.put(104, createLocation("104", 32.066283, 34.840726));
         location_buildings.put(105, createLocation("105", 32.066029, 34.841693));
         location_buildings.put(106, createLocation("106", 32.065988, 34.842164));
         location_buildings.put(107, createLocation("107", 32.065834, 34.842687));
         location_buildings.put(108, createLocation("108", 32.066012, 34.843229));
+        location_buildings.put(109, createLocation("109", 32.066285, 34.841683));
         location_buildings.put(201, createLocation("201", 32.066535, 34.840923));
+        location_buildings.put(202, createLocation("202", 32.066668, 34.841400));
         location_buildings.put(203, createLocation("203", 32.066700, 34.842129));
         location_buildings.put(204, createLocation("204", 32.066759, 34.840722));
+        location_buildings.put(205, createLocation("205", 32.066939, 34.840646));
         location_buildings.put(206, createLocation("206", 32.067013, 34.841453));
+        location_buildings.put(207, createLocation("207", 32.066956, 34.842188));
+        location_buildings.put(208, createLocation("208", 32.067261, 34.840761));
+        location_buildings.put(209, createLocation("209", 32.067436, 34.840812));
+        location_buildings.put(211, createLocation("211", 32.067382, 34.841898));
+        location_buildings.put(212, createLocation("212", 32.067725, 34.841895));
+        location_buildings.put(213, createLocation("213", 32.068066, 34.841852));
+        location_buildings.put(214, createLocation("214", 32.067637, 34.840863));
+        location_buildings.put(215, createLocation("215", 32.067838, 34.841123));
+
+
 
         location_buildings.put(216, createLocation("216", 32.068687, 34.842063));
         location_buildings.put(217, createLocation("217", 32.069239, 34.842098));
