@@ -79,6 +79,19 @@ public class MapsDB {
 
     public void setLocation_buildings(){
         //location_buildings.put(numBuilding,createLocation());
+
+        location_buildings.put(100, createLocation("100", 32.065704, 34.840879));
+        location_buildings.put(101, createLocation("101", 32.065874, 34.840133));
+        location_buildings.put(103, createLocation("103", 32.066551, 34.840238));
+        location_buildings.put(105, createLocation("105", 32.066029, 34.841693));
+        location_buildings.put(106, createLocation("106", 32.065988, 34.842164));
+        location_buildings.put(107, createLocation("107", 32.065834, 34.842687));
+        location_buildings.put(108, createLocation("108", 32.066012, 34.843229));
+        location_buildings.put(201, createLocation("201", 32.066535, 34.840923));
+        location_buildings.put(203, createLocation("203", 32.066700, 34.842129));
+        location_buildings.put(204, createLocation("204", 32.066759, 34.840722));
+        location_buildings.put(206, createLocation("206", 32.067013, 34.841453));
+
         location_buildings.put(216, createLocation("216", 32.068687, 34.842063));
         location_buildings.put(217, createLocation("217", 32.069239, 34.842098));
         location_buildings.put(300, createLocation("300", 32.066438, 34.843774)); // לא מדוייק
