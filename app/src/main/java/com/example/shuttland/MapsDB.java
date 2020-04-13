@@ -28,6 +28,7 @@ public class MapsDB {
         building_to_near_station = new HashMap<>();
         location_buildings = new HashMap<>();
         setBuildingToNearStation();
+        setLocation_buildings();
     }
 
     // static method to create instance of Singleton class
@@ -39,6 +40,9 @@ public class MapsDB {
         return single_instance;
     }
 
+    public Map<Integer, Location> getLocation_buildings() {
+        return location_buildings;
+    }
 
     public void setStationsDistances() {
         // 0->1
@@ -80,7 +84,6 @@ public class MapsDB {
     public void setLocation_buildings(){
         //location_buildings.put(numBuilding,createLocation());
 
-
         location_buildings.put(100, createLocation("100", 32.065704, 34.840879));
         location_buildings.put(101, createLocation("101", 32.065874, 34.840133));
         location_buildings.put(102, createLocation("102", 32.065997, 34.840855));
@@ -105,9 +108,6 @@ public class MapsDB {
         location_buildings.put(213, createLocation("213", 32.068066, 34.841852));
         location_buildings.put(214, createLocation("214", 32.067637, 34.840863));
         location_buildings.put(215, createLocation("215", 32.067838, 34.841123));
-
-
-
         location_buildings.put(216, createLocation("216", 32.068687, 34.842063));
         location_buildings.put(217, createLocation("217", 32.069239, 34.842098));
         location_buildings.put(300, createLocation("300", 32.066438, 34.843774)); // לא מדוייק
@@ -279,4 +279,9 @@ public class MapsDB {
     public List<Float> getdistance_of_station() {
         return distance_of_station;
     }
+
+    public Location getSpecificBuildingLocation(int buildingNum) {
+        return location_buildings.get(buildingNum);
+    }
 }
+

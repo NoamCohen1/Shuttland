@@ -1,11 +1,8 @@
 package com.example.shuttland;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,21 +23,26 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    Location userLocation;
+    Location src = new Location("src");
+    Location dest = new Location("dest");
     private NavigationModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Bundle bundle = getIntent().getExtras();
+        src.setLatitude(bundle.getDouble("srcLat"));
+        src.setLongitude(bundle.getDouble("srcLon"));
+        dest.setLatitude(bundle.getDouble("destLat"));
+        dest.setLongitude(bundle.getDouble("destLon"));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         this.model=new NavigationModel();
-
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -48,46 +50,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         checkPermission();
 
-        final LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                if (userLocation == null) {
-                    userLocation = new Location("user");
-                    userLocation.setLatitude(location.getLatitude());
-                    userLocation.setLongitude(location.getLongitude());
-                }
-            }
+//        final LocationListener locationListener = new LocationListener() {
+//            @Override
+//            public void onLocationChanged(android.location.Location location) {
+//                if (userLocation == null) {
+//                    userLocation = new Location("user");
+//                    userLocation.setLatitude(location.getLatitude());
+//                    userLocation.setLongitude(location.getLongitude());
+//                }
+//            }
+//
+//            @Override
+//            public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//            }
+//
+//            @Override
+//            public void onProviderEnabled(String provider) {
+//
+//            }
+//
+//            @Override
+//            public void onProviderDisabled(String provider) {
+//
+//            }
+//
+//        };
+//        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        Location location = null;
+//        for (String provider : lm.getProviders(true)) {
+//            location = lm.getLastKnownLocation(provider);
+//            lm.requestLocationUpdates(provider, 3000, 0, locationListener);
+//        }
+//        //3 seconds and 10 meters
+//        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 10, locationListener);
+//
+//
+//        Location nearestStation = model.findNearestStation(location);
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
 
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-
-        };
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Location location = null;
-        for (String provider : lm.getProviders(true)) {
-            location = lm.getLastKnownLocation(provider);
-            lm.requestLocationUpdates(provider, 3000, 0, locationListener);
-        }
-        //3 seconds and 10 meters
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 10, locationListener);
-
-
-        Location nearestStation = model.findNearestStation(location);
-
-
-        LatLng latLng = new LatLng(nearestStation.getLatitude(), nearestStation.getLongitude());
+        LatLng latLng = new LatLng(dest.getLatitude(), dest.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(latLng)
                 .title("Marker in station"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -97,8 +99,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        System.out.println("---------------------------------");
 
 
-        String strUri = "http://maps.google.com/maps?saddr=" + location.getLatitude() + "," + location.getLongitude()
-                + "&daddr=" + nearestStation.getLatitude() + "," + nearestStation.getLongitude();
+        String strUri = "http://maps.google.com/maps?saddr=" + src.getLatitude() + "," + src.getLongitude()
+                + "&daddr=" + dest.getLatitude() + "," + dest.getLongitude();
 
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse(strUri));

@@ -1,11 +1,7 @@
 package com.example.shuttland;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +31,14 @@ public class NavigationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        Bundle bundle = getIntent().getExtras();
+        userLocation.setLongitude(bundle.getDouble("userLon"));
+        userLocation.setLatitude(bundle.getDouble("userLat"));
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        userLocation.setLatitude(32.0671975);
+        userLocation.setLongitude(34.840333699999995);
 
         Button goButton = (Button) findViewById(R.id.goButton);
         goButton.setOnClickListener(new View.OnClickListener() {
@@ -63,12 +66,7 @@ public class NavigationActivity extends AppCompatActivity {
                                        int position, long id) {
                 //String buildingSelected = ;
                 if (!parent.getItemAtPosition(position).equals("")) {
-
-                    selectedBuilding=Integer.parseInt((String)parent.getItemAtPosition(position));
-                    getUserLocation();
-                    Log.v("itembbbbbbbbbbb", (String) parent.getItemAtPosition(position));
-                    int y=0;
-
+                    selectedBuilding = Integer.parseInt((String)parent.getItemAtPosition(position));
                 }
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
@@ -82,17 +80,10 @@ public class NavigationActivity extends AppCompatActivity {
         this.model=new NavigationModel();
         writeToDB();
         readFromDB();
-//        Location loc=new Location("3");
-//        loc.setLatitude(32.0723118);
-//        loc.setLongitude(34.844318799999996);
-//        userLocation=getUserLocation();
-//        int ans=this.model.findNearestShuttle(loc);
-
-//        int o=9;
     }
 
 
-    public Location getUserLocation() {
+   /* public Location getUserLocation() {
         checkPermission();
 
         final LocationListener locationListener = new LocationListener() {
@@ -139,7 +130,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
 
-
+*/
     public void writeToDB() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         myRef = db.getReference("1");
@@ -163,8 +154,6 @@ public class NavigationActivity extends AppCompatActivity {
                         , Boolean.parseBoolean(location_point[2]));
                 Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()), info);
 
-
-
             }
 
             @Override
@@ -183,7 +172,4 @@ public class NavigationActivity extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
-
-
-
 }

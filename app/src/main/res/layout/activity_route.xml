@@ -69,10 +69,39 @@
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="12dp" />
-
     <!--        android:layout_span="2"-->
     <!--        android:layout_weight="1"-->
 
+
     </TableRow>
+
+    <TableRow
+        android:id="@+id/fourthRow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/navigateBuilding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="נווט לבניין"
+            android:padding="18dip"
+            />
+
+        <TextView
+            android:id="@+id/targetBuilding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dip"
+            android:text="לך אל בניין"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+
+
+
+    </TableRow>
+
 
 </TableLayout>
