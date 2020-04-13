@@ -37,8 +37,8 @@ public class NavigationActivity extends AppCompatActivity {
         userLocation.setLatitude(bundle.getDouble("userLat"));
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        userLocation.setLatitude(32.0671975);
-        userLocation.setLongitude(34.840333699999995);
+//        userLocation.setLatitude(32.0671975);
+//        userLocation.setLongitude(34.840333699999995);
 
         Button goButton = (Button) findViewById(R.id.goButton);
         goButton.setOnClickListener(new View.OnClickListener() {

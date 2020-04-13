@@ -14,6 +14,7 @@ public class NavigationModel {
         this.stations =  MapsDB.getInstance().getStations();
     }
 
+
     public Location findNearestStation(Location userLocation) {
         Location closestLocation = null;
         float smallestDistance = -1;
