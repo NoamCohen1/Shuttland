@@ -66,7 +66,9 @@ public class NavigationActivity extends AppCompatActivity {
                                        int position, long id) {
                 //String buildingSelected = ;
                 if (!parent.getItemAtPosition(position).equals("")) {
-                    selectedBuilding = Integer.parseInt((String)parent.getItemAtPosition(position));
+                    String selected = (String)parent.getItemAtPosition(position);
+                    String[] parts = selected.split(" -");
+                    selectedBuilding = Integer.parseInt(parts[0]);
                 }
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
