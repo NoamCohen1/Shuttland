@@ -9,8 +9,8 @@
     <TextView
         android:id="@+id/sourceText"
         android:layout_toRightOf="@id/source"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="165dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="מקור" />
@@ -19,6 +19,7 @@
         android:id="@+id/source"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
         android:padding="@dimen/activity_horizontal_margin"
         android:text="מיקומך הנוכחי" />
@@ -26,7 +27,7 @@
     <TextView
         android:id="@+id/targetText"
         android:layout_toRightOf="@id/target"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="250dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,16 +40,17 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:layout_width="280dp"
         android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="250dp" />
 
     <Button
         android:id="@+id/goButton"
         android:width="100dp"
         android:layout_marginTop="350dp"
-        android:layout_marginLeft="150dp"
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
         android:text="Go" />
 
 
