@@ -1,36 +1,39 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
+    android:stretchColumns="*"
+    android:paddingTop="100dip"
     tools:context=".RouteActivity">
-    android:stretchColumns="1"> <!-- stretch the second column of the layout-->
 
     <!-- first row of the table layout-->
     <TableRow
 
         android:id="@+id/firstRow"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
         <!-- first element of the row-->
         <Button
             android:id="@+id/navigateBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="נווט לתחנה"
+            android:text="נווט"
             android:padding="18dip"
         />
 
         <TextView
             android:id="@+id/srcStation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="18dip"
             android:textAlignment="center"
             android:text="לך אל תחנה "
+            android:layout_span="4"
             android:textColor="#000"
-            android:textSize="12dp" />
+            android:autoSizeTextType="uniform"/>
 
 
     </TableRow>
@@ -38,7 +41,8 @@
     <TableRow
         android:id="@+id/secondRow"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/timeShuttle"
@@ -47,18 +51,16 @@
             android:padding="18dip"
             android:text="השאטל יגיע בעוד"
             android:textAlignment="center"
+            android:layout_span="5"
             android:textColor="#000"
-            android:textSize="12dp" />
-
-<!--        android:layout_span="2"-->
-<!--        android:layout_weight="1"-->
-
+            android:autoSizeTextType="uniform" />
     </TableRow>
 
     <TableRow
     android:id="@+id/ThirdRow"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/targetStation"
@@ -66,25 +68,23 @@
         android:layout_height="wrap_content"
         android:padding="18dip"
         android:text="סע עד תחנה "
+        android:layout_span="5"
         android:textAlignment="center"
         android:textColor="#000"
-        android:textSize="12dp" />
-    <!--        android:layout_span="2"-->
-    <!--        android:layout_weight="1"-->
-
-
+        android:autoSizeTextType="uniform" />
     </TableRow>
 
     <TableRow
         android:id="@+id/fourthRow"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
         <Button
             android:id="@+id/navigateBuilding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="נווט לבניין"
+            android:text="נווט"
             android:padding="18dip"
             />
 
@@ -94,12 +94,10 @@
             android:layout_height="wrap_content"
             android:padding="18dip"
             android:text="לך אל בניין"
+            android:layout_span="4"
             android:textAlignment="center"
             android:textColor="#000"
-            android:textSize="12dp" />
-
-
-
+            android:autoSizeTextType="uniform" />
 
     </TableRow>
 
