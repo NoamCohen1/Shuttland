@@ -4,7 +4,10 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".NavigationActivity">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".NavigationActivity"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/sourceText"
@@ -28,7 +31,7 @@
 
     <TextView
         android:id="@+id/targetText"
-        android:layout_toRightOf="@id/target"
+        android:layout_toRightOf="@id/autocomplete"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="265dp"
         android:layout_width="wrap_content"
@@ -36,15 +39,34 @@
         android:autoSizeTextType="uniform"
         android:text="יעד" />
 
-
-    <Spinner
-        android:id="@+id/target"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/activity_horizontal_margin"
+    <AutoCompleteTextView
+        android:id="@+id/autocomplete"
         android:layout_width="280dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp" />
+        android:layout_marginTop="250dp"/>
+
+    <ImageView
+        android:id="@+id/drop_down_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/autocomplete"
+        android:layout_alignRight="@id/autocomplete"
+        android:layout_alignBottom="@id/autocomplete"
+        android:padding="10dp"
+        android:src="@mipmap/baseline_arrow_drop_down_black_48dp" />
+
+    <ImageView
+        android:id="@+id/search_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/autocomplete"
+        android:layout_alignLeft="@id/autocomplete"
+        android:layout_alignBottom="@id/autocomplete"
+        android:padding="10dp"
+        android:layout_marginBottom="5dp"
+        android:src="@mipmap/baseline_search_black_48dp" />
 
     <Button
         android:id="@+id/goButton"
@@ -55,9 +77,6 @@
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:text="Go" />
-
-
-
 
 </RelativeLayout>
 

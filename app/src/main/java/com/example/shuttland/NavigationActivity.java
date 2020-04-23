@@ -1,13 +1,17 @@
 package com.example.shuttland;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +29,8 @@ public class NavigationActivity extends AppCompatActivity {
     private NavigationModel model;
     Location userLocation = new Location("user");
     int selectedBuilding;
-
+    ArrayAdapter<CharSequence> arrayAdapter;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,35 +52,44 @@ public class NavigationActivity extends AppCompatActivity {
                 openRootActivity();
             }
         });
-        Spinner staticSpinner = (Spinner) findViewById(R.id.target);
 
         // Create an ArrayAdapter using the string array and a default spinner
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
+        arrayAdapter = ArrayAdapter
                 .createFromResource(this, R.array.building_array,
                         android.R.layout.simple_spinner_item);
 
         // Specify the layout to use when the list of choices appears
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // Apply the adapter to the spinner
-        staticSpinner.setAdapter(staticAdapter);
+        final AutoCompleteTextView autoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
+        autoComplete.setAdapter(arrayAdapter);
+        autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(view.getContext().INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
 
-        staticSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                //String buildingSelected = ;
                 if (!parent.getItemAtPosition(position).equals("")) {
                     String selected = (String)parent.getItemAtPosition(position);
                     String[] parts = selected.split(" -");
                     selectedBuilding = Integer.parseInt(parts[0]);
                 }
-                Log.v("item", (String) parent.getItemAtPosition(position));
             }
+        });
 
+        autoComplete.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        ImageView dropDown = (ImageView) findViewById(R.id.drop_down_img);
+        dropDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoComplete.showDropDown();
             }
         });
 
@@ -173,5 +187,10 @@ public class NavigationActivity extends AppCompatActivity {
         bundle.putInt("numBuilding",selectedBuilding);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

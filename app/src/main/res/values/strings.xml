@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Shuttland</string>
     <string name="title_activity_maps">Map</string>
+    <string name="search_hint">חפש</string>
     <string-array name="building_array">
         <item> </item>
         <item>100 - בית החיות</item>
