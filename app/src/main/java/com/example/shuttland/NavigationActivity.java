@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,7 +29,6 @@ public class NavigationActivity extends AppCompatActivity {
     Location userLocation = new Location("user");
     int selectedBuilding;
     ArrayAdapter<CharSequence> arrayAdapter;
-    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
