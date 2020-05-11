@@ -1,11 +1,14 @@
 package com.example.shuttland;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,10 +17,13 @@ public class RouteActivity extends AppCompatActivity {
      int selectedBuilding;
     private NavigationModel model = new NavigationModel();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_route);
+
         Bundle bundle = getIntent().getExtras();
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
@@ -29,6 +35,7 @@ public class RouteActivity extends AppCompatActivity {
         final Location userStation = ans_near;
         int final_station = MapsDB.getInstance().getBuilding_to_near_station().get(selectedBuilding);
         final Location final_station_location = MapsDB.getInstance().getStations().get(final_station);
+
 
         TextView src_station = (TextView) findViewById(R.id.srcStation);
         src_station.setText("לך אל תחנה " + userStation.getProvider());
@@ -116,7 +123,5 @@ public class RouteActivity extends AppCompatActivity {
         intent.putExtras(bundle);
         startActivity(intent);
     }
-
-
 
 }

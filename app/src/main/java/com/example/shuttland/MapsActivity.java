@@ -1,10 +1,12 @@
 package com.example.shuttland;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -42,6 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         this.model=new NavigationModel();
+
     }
 
     @Override
@@ -102,10 +105,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String strUri = "http://maps.google.com/maps?saddr=" + src.getLatitude() + "," + src.getLongitude()
                 + "&daddr=" + dest.getLatitude() + "," + dest.getLongitude();
 
+
+
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse(strUri));
-        startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
+        startActivity(intent);
+        finish();
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
 
     }

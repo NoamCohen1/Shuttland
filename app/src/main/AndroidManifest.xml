@@ -20,7 +20,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RouteActivity"></activity>
         <activity android:name=".NavigationActivity" />
-        <activity android:name=".MapsActivity" />
+        <activity android:name=".MapsActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="ir.bornait.isan" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
