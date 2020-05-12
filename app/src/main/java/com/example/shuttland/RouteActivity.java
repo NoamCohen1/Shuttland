@@ -2,6 +2,7 @@ package com.example.shuttland;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static androidx.core.view.ViewCompat.getLayoutDirection;
+
 public class RouteActivity extends AppCompatActivity {
      Location userLocation= new Location("user");
      int selectedBuilding;
@@ -21,7 +24,7 @@ public class RouteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        shouldUseLayoutRtl();
         setContentView(R.layout.activity_route);
 
         Bundle bundle = getIntent().getExtras();
@@ -110,6 +113,18 @@ public class RouteActivity extends AppCompatActivity {
         destText.setText("סע עד תחנה "+ final_station);
 
     }
+
+    private boolean shouldUseLayoutRtl() {
+        Configuration config = getResources().getConfiguration();
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+
+        } else {
+            return false;
+        }
+    }
+
 
     public void openActivityNearStation(Location src, Location dest) {
         // move parameters - nearest station, user location

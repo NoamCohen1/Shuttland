@@ -17,7 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
-        android:text="מקור" />
+        android:text="מקור"
+        android:layout_toEndOf="@id/source"
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:id="@+id/source"
@@ -37,7 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
-        android:text="יעד" />
+        android:text="יעד"
+        android:layout_toEndOf="@id/autocomplete"
+        android:layout_marginStart="10dp" />
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
@@ -56,7 +60,8 @@
         android:layout_alignRight="@id/autocomplete"
         android:layout_alignBottom="@id/autocomplete"
         android:padding="10dp"
-        android:src="@mipmap/baseline_arrow_drop_down_black_48dp" />
+        android:src="@mipmap/baseline_arrow_drop_down_black_48dp"
+        android:layout_alignEnd="@id/autocomplete" />
 
     <ImageView
         android:id="@+id/search_img"
@@ -67,7 +72,8 @@
         android:layout_alignBottom="@id/autocomplete"
         android:padding="10dp"
         android:layout_marginBottom="5dp"
-        android:src="@mipmap/baseline_search_black_48dp" />
+        android:src="@mipmap/baseline_search_black_48dp"
+        android:layout_alignStart="@id/autocomplete" />
 
     <Button
         android:id="@+id/goButton"
