@@ -2,6 +2,7 @@ package com.example.shuttland;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
 
         Bundle bundle = getIntent().getExtras();
@@ -185,6 +187,16 @@ public class NavigationActivity extends AppCompatActivity {
         bundle.putInt("numBuilding",selectedBuilding);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+    private boolean shouldUseLayoutRtl() {
+        Configuration config = getResources().getConfiguration();
+        if (android.os.Build.VERSION.SDK_INT >=
+                android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+
+        } else {
+            return false;
+        }
     }
 
     public void hideKeyboard(View view) {

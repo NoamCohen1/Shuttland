@@ -13,16 +13,19 @@
         android:id="@+id/firstRow"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+
+        android:padding="20dp"
+      >
 
         <TextView
             android:id="@+id/srcStation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:padding="18dip"
             android:textAlignment="center"
             android:text="לך אל תחנה "
-            android:layout_span="4"
+            android:layout_span="3"
             android:textColor="#000"
             android:autoSizeTextType="uniform"/>
 
@@ -80,6 +83,17 @@
         android:layout_height="match_parent"
         android:padding="20dp">
 
+        <TextView
+            android:id="@+id/targetBuilding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dip"
+            android:text="לך אל בניין"
+            android:layout_span="3"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:autoSizeTextType="uniform" />
+
         <Button
             android:id="@+id/navigateBuilding"
             android:layout_width="wrap_content"
@@ -87,17 +101,6 @@
             android:text="נווט"
             android:padding="18dip"
             />
-
-        <TextView
-            android:id="@+id/targetBuilding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="18dip"
-            android:text="לך אל בניין"
-            android:layout_span="4"
-            android:textAlignment="center"
-            android:textColor="#000"
-            android:autoSizeTextType="uniform" />
 
     </TableRow>
 

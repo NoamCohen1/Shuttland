@@ -77,13 +77,13 @@
 
     <Button
         android:id="@+id/goButton"
-        android:width="100dp"
-        android:layout_marginTop="350dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_centerHorizontal="true"
-        android:text="Go" />
+        android:layout_gravity="center"
+        android:layout_marginTop="350dp"
+        android:width="100dp"
+        android:text="חפש" />
 
 </RelativeLayout>
 
