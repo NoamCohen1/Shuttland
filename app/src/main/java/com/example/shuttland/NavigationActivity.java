@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class NavigationActivity extends AppCompatActivity {
+    FirebaseDatabase mFireBase;
     DatabaseReference myRef;
     private NavigationModel model;
     Location userLocation = new Location("user");
@@ -36,6 +37,9 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
+
+        mFireBase = FirebaseDatabase.getInstance();
+        myRef = mFireBase.getReference("custom-name-262112/1");
 
         Bundle bundle = getIntent().getExtras();
         userLocation.setLongitude(bundle.getDouble("userLon"));
@@ -94,7 +98,7 @@ public class NavigationActivity extends AppCompatActivity {
         });
 
         this.model=new NavigationModel();
-        writeToDB();
+        //writeToDB();
         readFromDB();
     }
 
@@ -148,8 +152,7 @@ public class NavigationActivity extends AppCompatActivity {
 
 */
     public void writeToDB() {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        myRef = db.getReference("1");
+
         myRef.setValue("32.0734411, 34.8483981,true");
         //myRef = db.getReference("2");
         //myRef.setValue("32.0735301, 34.846368,true");
