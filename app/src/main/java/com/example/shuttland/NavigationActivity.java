@@ -39,7 +39,7 @@ public class NavigationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_navigation);
 
         mFireBase = FirebaseDatabase.getInstance();
-        myRef = mFireBase.getReference("custom-name-262112/1");
+        myRef = mFireBase.getReference("shuttles");
 
         Bundle bundle = getIntent().getExtras();
         userLocation.setLongitude(bundle.getDouble("userLon"));
@@ -165,13 +165,21 @@ public class NavigationActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.v("key", "Value is: " + value);
-                System.out.println("********** " + value);
-                String[] location_point = value.split(",");
-                Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
-                        , Boolean.parseBoolean(location_point[2]));
-                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()), info);
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    String value = keyNode.getValue(String.class);
+                    String[] location_point = value.split(",");
+                   Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
+                       , Boolean.parseBoolean(location_point[2]));
+                   Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
+
+                }
+               // Shuttle_string value = dataSnapshot.getValue(Shuttle_string.class);
+//                Log.v("key", "Value is: " + value);
+//                System.out.println("********** " + value);
+//                String[] location_point = value.split(",");
+//                Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
+//                        , Boolean.parseBoolean(location_point[2]));
+//                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()), info);
 
             }
 
