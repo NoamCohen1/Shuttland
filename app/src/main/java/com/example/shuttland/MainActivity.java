@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userLocation = getUserLocation();
+        //userLocation = getUserLocation();
+        userLocation = new Location("user");
+        userLocation.setLatitude(32.074879);
+        userLocation.setLongitude(34.868378);
 
         stationBtn = (Button) findViewById(R.id.nearStation);
         stationBtn.setOnClickListener(new View.OnClickListener() {

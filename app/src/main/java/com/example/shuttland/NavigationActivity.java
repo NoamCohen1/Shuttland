@@ -151,8 +151,8 @@ public class NavigationActivity extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         myRef = db.getReference("1");
         myRef.setValue("32.0734411, 34.8483981,true");
-        myRef = db.getReference("2");
-        myRef.setValue("32.0735301, 34.846368,true");
+        //myRef = db.getReference("2");
+        //myRef.setValue("32.0735301, 34.846368,true");
     }
 
     public void readFromDB() {
