@@ -44,11 +44,19 @@ public class NavigationModel {
     }
 
     // - צריך להחזיר 10 דקות(לבדוק) + הזמן מתחנה 0 עד אליו אם מחזיר  MAX INT
-    public int findNearestShuttle(Location station_location) {
+    public int findNearestShuttle(Location station_location, Boolean isAccess) {
         float minDis = Float.MAX_VALUE;
         // not valid num shuttle
         int ans=Integer.MAX_VALUE;
-        for (Map.Entry<Integer, Shuttle_Info> entry : Shuttle_Map.getInstance().getActiveShuttles().entrySet()) {
+        Map<Integer, Shuttle_Info> my_map;
+        if (isAccess) {
+            my_map = Shuttle_Map.getInstance().getAccessActiveShuttles();
+
+        } else {
+            my_map = Shuttle_Map.getInstance().getActiveShuttles();
+
+        }
+        for (Map.Entry<Integer, Shuttle_Info> entry : my_map.entrySet()) {
             Location shuttle_location = new Location("0");
             shuttle_location.setLongitude(entry.getValue().getLocation().longitude);
             shuttle_location.setLatitude(entry.getValue().getLocation().latitude);

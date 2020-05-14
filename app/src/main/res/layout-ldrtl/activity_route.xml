@@ -54,9 +54,17 @@
             android:padding="18dip"
             android:text="השאטל יגיע בעוד"
             android:textAlignment="center"
-            android:layout_span="5"
+            android:layout_span="3"
             android:textColor="#000"
             android:autoSizeTextType="uniform" />
+        <Button
+            android:id="@+id/accessBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="נכה"
+            android:padding="18dip"
+            android:layout_span="1"
+            />
     </TableRow>
 
     <TableRow
@@ -101,6 +109,20 @@
             android:text="נווט"
             android:padding="18dip"
             />
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/accessShuttle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dip"
+            android:text="השאטל יגיע בעוד"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:layout_span="5"
+            android:textColor="#000"
+            android:autoSizeTextType="uniform" />
 
     </TableRow>
 
