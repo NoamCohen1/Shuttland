@@ -5,17 +5,24 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+
+import java.util.Calendar;
+import java.util.Date;
 
 import static androidx.core.view.ViewCompat.getLayoutDirection;
 
 public class RouteActivity extends AppCompatActivity {
+
+    private static final int BEGIN_HOUR = 730; //7:30
+    private static final int END_HOUR = 2000;
+    private static final int END_HOUR_FRIDAY = 1300;
+
+
      Location userLocation= new Location("user");
      int selectedBuilding;
     private NavigationModel model = new NavigationModel();
@@ -91,6 +98,28 @@ public class RouteActivity extends AppCompatActivity {
                                 time = model.calcTime(userStationTemp, shuttleLoc);
                             }
                             TextView timeText = (TextView) findViewById(R.id.timeShuttle);
+
+
+
+
+                            Date date=new Date();
+//                            String day = String.format("%E", date ).toLowerCase();
+
+
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(date);
+                            int day = c.get(Calendar.DAY_OF_WEEK);
+
+                            if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR,c))){
+                                timeText.setText("השאטל הבא יצא ביום ראשון ב-7:30 בבוקר");
+                                return;
+                            }
+
+                                if(!validTime(BEGIN_HOUR,END_HOUR,c)){
+                                timeText.setText("השאטל הבא יצא ב-7:30 בבוקר");
+                                return;
+                            }
+
                             if (time == 0) {
                                 timeText.setText("השאטל מגיע כעת");
                             } else {
@@ -137,6 +166,11 @@ public class RouteActivity extends AppCompatActivity {
         bundle.putDouble("destLon",dest.getLongitude());
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    public  Boolean validTime(int from, int to, Calendar c){
+        int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
+        return (to > from && t >= from && t <= to || to < from && (t >= from || t <= to));
     }
 
 }

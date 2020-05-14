@@ -1,9 +1,13 @@
 package com.example.shuttland;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
@@ -41,9 +46,12 @@ public class NavigationActivity extends AppCompatActivity {
         mFireBase = FirebaseDatabase.getInstance();
         myRef = mFireBase.getReference("shuttles");
 
-        Bundle bundle = getIntent().getExtras();
-        userLocation.setLongitude(bundle.getDouble("userLon"));
-        userLocation.setLatitude(bundle.getDouble("userLat"));
+
+        //userLocation = getUserLocation();
+        userLocation = new Location("user");
+        userLocation.setLatitude(32.074879);
+        userLocation.setLongitude(34.868378);
+
 
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        userLocation.setLatitude(32.0671975);
@@ -103,7 +111,7 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
 
-   /* public Location getUserLocation() {
+    public Location getUserLocation() {
         checkPermission();
 
         final LocationListener locationListener = new LocationListener() {
@@ -149,14 +157,6 @@ public class NavigationActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
     }
 
-
-*/
-    public void writeToDB() {
-
-        myRef.setValue("32.0734411, 34.8483981,true");
-        //myRef = db.getReference("2");
-        //myRef.setValue("32.0735301, 34.846368,true");
-    }
 
     public void readFromDB() {
         // Read from the database

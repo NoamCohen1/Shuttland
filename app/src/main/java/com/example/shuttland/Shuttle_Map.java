@@ -2,27 +2,23 @@ package com.example.shuttland;
 
 import android.annotation.SuppressLint;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Shuttle_Map {
 
     private Map<Integer, Shuttle_Info> shuttle_infoMap;
-    private final static int num_shuttle = 7;
+    private final static int NUM_SHUTTLE = 7;
+    private final static int NUM_ACCESS_SHUTTLE=2;
     private static Shuttle_Map my_instance = null;
 
     @SuppressLint("UseSparseArrays")
     private Shuttle_Map() {
         this.shuttle_infoMap = new HashMap<>();
-        for (int i = 0; i < num_shuttle; i++) {
+        for (int i = 0; i < NUM_SHUTTLE+NUM_ACCESS_SHUTTLE; i++) {
             shuttle_infoMap.put(i, new Shuttle_Info());
         }
-        Shuttle_Info info = new Shuttle_Info(new LatLng(32.0734411, 34.8483981), true);
-        shuttle_infoMap.put(1, info);
-        info = new Shuttle_Info(new LatLng(32.0735301, 34.846368),true);
-        shuttle_infoMap.put(2, info);
+
     }
 
 
@@ -50,5 +46,15 @@ public class Shuttle_Map {
             }
         }
         return active;
+    }
+
+    public Map<Integer, Shuttle_Info> getAccessActiveShuttles() {
+        @SuppressLint("UseSparseArrays") Map<Integer, Shuttle_Info> access_active=new HashMap<>();
+        for (Map.Entry<Integer, Shuttle_Info> entry : Shuttle_Map.getInstance().getShuttle_infoMap().entrySet()) {
+            if(entry.getValue().isActive()&& entry.getKey()>NUM_SHUTTLE) {
+                access_active.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return access_active;
     }
 }
