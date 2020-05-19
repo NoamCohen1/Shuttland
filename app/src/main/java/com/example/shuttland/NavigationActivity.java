@@ -2,7 +2,9 @@ package com.example.shuttland;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -11,6 +13,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,6 +47,7 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFireBase = FirebaseDatabase.getInstance();
         myRef = mFireBase.getReference("shuttles");
@@ -52,16 +58,50 @@ public class NavigationActivity extends AppCompatActivity {
         userLocation.setLatitude(32.074879);
         userLocation.setLongitude(34.868378);
 
-
+//        final ImageView bus = (ImageView) findViewById(R.id.bus);
+//
+//       final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.move);
+//       MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+//        myAnim.setInterpolator(interpolator);
+//        bus.startAnimation(myAnim);
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        userLocation.setLatitude(32.0671975);
 //        userLocation.setLongitude(34.840333699999995);
 
-        Button goButton = (Button) findViewById(R.id.goButton);
+        final Button goButton = (Button) findViewById(R.id.goButton);
+//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.grow);
+//        //AnimationSet set=new AnimationSet(false);
+//        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
+//        myAnim.setInterpolator(interpolator);
+//        goButton.startAnimation(myAnim);
+
+
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openRootActivity();
+                if(selectedBuilding==0) {  // the user not choose building
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            if (!isFinishing()){
+                                new AlertDialog.Builder(NavigationActivity.this)
+                                        .setTitle("יש לבחור בניין")
+                                        .setCancelable(false)
+                                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        }).setIcon(R.drawable.warning)
+                                        .show();
+                            }
+                        }
+                    });
+
+                }else {
+                    openRootActivity();
+                }
             }
         });
 
@@ -80,8 +120,8 @@ public class NavigationActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(view.getContext().INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
 
-                if (!parent.getItemAtPosition(position).equals("")) {
-                    String selected = (String)parent.getItemAtPosition(position);
+                if (!parent.getItemAtPosition(position).toString().equals("")) {
+                    String selected = parent.getItemAtPosition(position).toString();
                     String[] parts = selected.split(" -");
                     selectedBuilding = Integer.parseInt(parts[0]);
                 }
