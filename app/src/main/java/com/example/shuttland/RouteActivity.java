@@ -11,8 +11,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static androidx.core.view.ViewCompat.getLayoutDirection;
 
@@ -25,6 +28,8 @@ public class RouteActivity extends AppCompatActivity {
 
      Location userLocation= new Location("user");
      int selectedBuilding;
+     boolean isAccess = false;
+     Map<Integer, String> accessTime = MapsDB.getInstance().getAccessTime();
     private NavigationModel model = new NavigationModel();
 
 
@@ -38,6 +43,7 @@ public class RouteActivity extends AppCompatActivity {
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
         selectedBuilding=bundle.getInt("numBuilding");
+
 
         Location ans_near=model.findNearestStation(userLocation);
         if(ans_near.getProvider().equals("0"))
@@ -71,7 +77,41 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
 
-        final int nearsetShuttle = model.findNearestShuttle(userStation);
+
+        Button accessBtn = (Button) findViewById(R.id.accessBtn);
+        accessBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isAccess = true;
+                final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
+                final Location userStationTemp = userStation;
+                Thread th = new Thread(new Runnable() {
+                    public void run() {
+                        while (true) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    int time = updateTime(isAccess,nearsetShuttle,userStationTemp, userStation);
+                                    updateMsgForAccess(time);
+                                }
+                            });
+                            try {
+                                Thread.sleep(20000);
+                            }
+                            catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+                th.start();
+            }
+        });
+
+
+
+
+        final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
         final Location userStationTemp = userStation;
 
         Thread th = new Thread(new Runnable() {
@@ -80,51 +120,9 @@ public class RouteActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int time=0;
-                            boolean is_find_shuttle=true;
-                            int nearesetShuttleTemp=nearsetShuttle;
-                            if(nearesetShuttleTemp==Integer.MAX_VALUE){
-                                is_find_shuttle=false;
-                                time=10;
-                                nearesetShuttleTemp=model.findNearestShuttle(userStation);
-                                if(nearesetShuttleTemp!=Integer.MAX_VALUE)
-                                    is_find_shuttle=true;
+                            int time = updateTime(isAccess,nearsetShuttle,userStationTemp, userStation);
+                            updateMsg(time);
 
-                            }
-                           if(is_find_shuttle){
-                                Location shuttleLoc = new Location("user");
-                                shuttleLoc.setLatitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().latitude);
-                                shuttleLoc.setLongitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().longitude);
-                                time = model.calcTime(userStationTemp, shuttleLoc);
-                            }
-                            TextView timeText = (TextView) findViewById(R.id.timeShuttle);
-
-
-
-
-                            Date date=new Date();
-//                            String day = String.format("%E", date ).toLowerCase();
-
-
-                            Calendar c = Calendar.getInstance();
-                            c.setTime(date);
-                            int day = c.get(Calendar.DAY_OF_WEEK);
-
-                            if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR,c))){
-                                timeText.setText("השאטל הבא יצא ביום ראשון ב-7:30 בבוקר");
-                                return;
-                            }
-
-                                if(!validTime(BEGIN_HOUR,END_HOUR,c)){
-                                timeText.setText("השאטל הבא יצא ב-7:30 בבוקר");
-                                return;
-                            }
-
-                            if (time == 0) {
-                                timeText.setText("השאטל מגיע כעת");
-                            } else {
-                                timeText.setText("השאטל יגיע בעוד  " + time + " דקות");
-                            }
                         }
                     });
                     try {
@@ -137,6 +135,8 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
         th.start();
+
+
 
         TextView destText = (TextView) findViewById(R.id.targetStation);
         destText.setText("סע עד תחנה "+ final_station);
@@ -154,7 +154,102 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
+    public int updateTime(boolean isAccess,int nearsetShuttle, Location userStationTemp, Location userStation) {
+        int time=0;
+        boolean is_find_shuttle=true;
+        int nearesetShuttleTemp=nearsetShuttle;
+        if(nearesetShuttleTemp==Integer.MAX_VALUE){
+            is_find_shuttle=false;
+            time=10;
+            if (isAccess) {
+                time = Integer.MAX_VALUE;
+            }
+            nearesetShuttleTemp=model.findNearestShuttle(userStation, isAccess);
+            if(nearesetShuttleTemp!=Integer.MAX_VALUE)
+                is_find_shuttle=true;
 
+        }
+        if(is_find_shuttle){
+            Location shuttleLoc = new Location("user");
+            shuttleLoc.setLatitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().latitude);
+            shuttleLoc.setLongitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().longitude);
+            time = model.calcTime(userStationTemp, shuttleLoc);
+        }
+        return time;
+    }
+
+    public void updateMsg(int time ){
+        TextView timeText = (TextView) findViewById(R.id.timeShuttle);
+
+        Date date=new Date();
+//                            String day = String.format("%E", date ).toLowerCase();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int day = c.get(Calendar.DAY_OF_WEEK);
+
+        if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR_FRIDAY,c))){
+            timeText.setText("השאטל הבא יצא ביום ראשון ב-7:30 בבוקר");
+            return;
+        }
+
+        if(!validTime(BEGIN_HOUR,END_HOUR,c)){
+            timeText.setText("השאטל הבא יצא ב-7:30 בבוקר");
+            return;
+        }
+
+        if (time == 0) {
+            timeText.setText("השאטל מגיע כעת");
+        } else {
+            timeText.setText("השאטל יגיע בעוד  " + time + " דקות");
+        }
+    }
+
+    public void updateMsgForAccess(int time){
+        TextView timeText = (TextView) findViewById(R.id.accessShuttle);
+        timeText.setVisibility(View.VISIBLE);
+
+        Date date=new Date();
+//                            String day = String.format("%E", date ).toLowerCase();
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        int day = c.get(Calendar.DAY_OF_WEEK);
+
+        if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR_FRIDAY,c))){
+            timeText.setText("השאטל הנגיש הבא יצא ביום ראשון ב-7:30 בבוקר");
+            return;
+        }
+
+        if(!validTime(BEGIN_HOUR,END_HOUR,c)){
+            timeText.setText("השאטל הנגיש הבא יצא ב-7:30 בבוקר");
+            return;
+        }
+
+        if (time == Integer.MAX_VALUE) {
+            //int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
+            int temp;
+            int current_time = 1400;
+            String ans = "";
+            int min = Integer.MAX_VALUE;
+            List<Integer> keys = new ArrayList(accessTime.keySet());
+            for (int i = 0 ; i < keys.size(); i++){
+                 temp = keys.get(i) - current_time;
+                 if (temp > 0 && temp < min) {
+                     min = temp;
+                     ans = accessTime.get(keys.get(i));
+                 }
+            }
+            timeText.setText("השאטל הנגיש יוצא ב - " + ans);
+
+        }
+        else if (time == 0) {
+            timeText.setText("השאטל מגיע כעת");
+        } else {
+            timeText.setText("השאטל הנגיש יגיע בעוד  " + time + " דקות");
+        }
+
+    }
     public void openActivityNearStation(Location src, Location dest) {
         // move parameters - nearest station, user location
         // move back

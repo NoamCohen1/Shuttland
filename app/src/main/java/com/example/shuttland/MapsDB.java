@@ -12,6 +12,7 @@ public class MapsDB {
 
     private List<Float> distance_of_station = new ArrayList<>();
     private List<Location> stations = new ArrayList<>();
+    private Map<Integer, String> accessTime = new HashMap<>();
 
     public Map<Integer, Integer> getBuilding_to_near_station() {
         return building_to_near_station;
@@ -28,6 +29,7 @@ public class MapsDB {
         location_buildings = new HashMap<>();
         setBuildingToNearStation();
         setLocation_buildings();
+        setAccessTime();
     }
 
     // static method to create instance of Singleton class
@@ -282,6 +284,26 @@ public class MapsDB {
 
     }
 
+    public void setAccessTime(){
+        accessTime.put(730, "7:30");
+        accessTime.put(745, "7:45");
+        accessTime.put(845, "8:45");
+        accessTime.put(945, "9:45");
+        accessTime.put(1130, "11:30");
+        accessTime.put(1145, "11:45");
+        accessTime.put(1330, "13:30");
+        accessTime.put(1345, "13:45");
+        accessTime.put(1530, "15:30");
+        accessTime.put(1545, "15:45");
+        accessTime.put(1730, "17:30");
+        accessTime.put(1745, "17:45");
+        accessTime.put(1930, "19:30");
+    }
+
+
+    public Map<Integer, String> getAccessTime() {
+        return accessTime;
+    }
 
     public void addLocation(String name, double lat, double lon) {
         Location location = new Location(name);
