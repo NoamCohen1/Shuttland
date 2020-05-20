@@ -2,15 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <layer-list>
-            <item android:right="10dp" android:top="10dp" >
+            <item android:left="10dp" android:top="10dp" >
                 <shape>
                     <corners android:radius="80dp" />
-                    <solid android:color="@color/darkBlueGray" />
+                    <solid android:color="@color/lightGray" />
                 </shape>
             </item>
             <item android:bottom="2dp" android:left="2dp">
                 <shape>
-                    <solid android:color="@color/turquoise"/>
+                    <solid android:color="@color/darktour"/>
                     <corners android:radius="80dp"/>
                     <padding android:bottom="10dp" android:left="10dp"
                         android:right="10dp" android:top="10dp" />

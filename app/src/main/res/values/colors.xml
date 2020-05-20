@@ -9,4 +9,11 @@
     <color name="backgroundColor">#37465B</color>
     <color name="maybe">#56667E</color>
     <color name="turquoise">#00F1C9</color>
+    <color name="blue">#170886</color>
+    <color name="darkblue">#080235</color>
+    <color name="lightgreen1">#B2D1AF</color>
+    <color name="lightgreen2">#76B370</color>
+    <color name="whitegray">#DEDEDE</color>
+    <color name="black">#000000</color>
+    <color name="darktour">#35C890</color>
 </resources>
