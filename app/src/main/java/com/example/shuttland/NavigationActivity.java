@@ -115,6 +115,8 @@ public class NavigationActivity extends AppCompatActivity {
 
         final AutoCompleteTextView autoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete);
         autoComplete.setAdapter(arrayAdapter);
+        autoComplete.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.gradient1));
+
         autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(view.getContext().INPUT_METHOD_SERVICE);
@@ -136,6 +138,7 @@ public class NavigationActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         ImageView dropDown = (ImageView) findViewById(R.id.drop_down_img);
         dropDown.setOnClickListener(new View.OnClickListener() {

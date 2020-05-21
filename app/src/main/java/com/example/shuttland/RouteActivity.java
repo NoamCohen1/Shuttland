@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +32,7 @@ public class RouteActivity extends AppCompatActivity {
      boolean isAccess = false;
      Map<Integer, String> accessTime = MapsDB.getInstance().getAccessTime();
     private NavigationModel model = new NavigationModel();
-
+    private boolean accessMode=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,33 +79,46 @@ public class RouteActivity extends AppCompatActivity {
         });
 
 
-        Button accessBtn = (Button) findViewById(R.id.accessBtn);
+        final ImageView accessBtn = (ImageView) findViewById(R.id.accessBtn);
+        final ImageView regularBtn = (ImageView) findViewById(R.id.regularBtn);
+        final TextView accessTime=(TextView) findViewById(R.id.accessShuttle);
+        final TextView regularTime=(TextView) findViewById(R.id.timeShuttle);
         accessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isAccess = true;
-                final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
-                final Location userStationTemp = userStation;
-                Thread th = new Thread(new Runnable() {
-                    public void run() {
-                        while (true) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int time = updateTime(isAccess,nearsetShuttle,userStationTemp, userStation);
-                                    updateMsgForAccess(time);
+                if (!accessMode) {
+                    isAccess = true;
+                    accessMode=true;
+                    accessBtn.setImageResource(R.drawable.shuttle_icon);
+                    accessTime.setVisibility(View.VISIBLE);
+                    regularTime.setVisibility(View.INVISIBLE);
+                    final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
+                    final Location userStationTemp = userStation;
+                    Thread th = new Thread(new Runnable() {
+                        public void run() {
+                            while (true) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int time = updateTime(isAccess, nearsetShuttle, userStationTemp, userStation);
+                                        updateMsgForAccess(time);
+                                    }
+                                });
+                                try {
+                                    Thread.sleep(20000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
                                 }
-                            });
-                            try {
-                                Thread.sleep(20000);
-                            }
-                            catch (InterruptedException e) {
-                                e.printStackTrace();
                             }
                         }
-                    }
-                });
-                th.start();
+                    });
+                    th.start();
+                }else{
+                    accessMode=false;
+                    accessTime.setVisibility(View.INVISIBLE);
+                    regularTime.setVisibility(View.VISIBLE);
+                    accessBtn.setImageResource(R.drawable.wheelchair);
+                }
             }
         });
 
@@ -207,7 +221,8 @@ public class RouteActivity extends AppCompatActivity {
 
     public void updateMsgForAccess(int time){
         TextView timeText = (TextView) findViewById(R.id.accessShuttle);
-        timeText.setVisibility(View.VISIBLE);
+       // timeText.setVisibility(View.VISIBLE);
+
 
         Date date=new Date();
 //                            String day = String.format("%E", date ).toLowerCase();
@@ -227,9 +242,9 @@ public class RouteActivity extends AppCompatActivity {
         }
 
         if (time == Integer.MAX_VALUE) {
-            //int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
+            int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
             int temp;
-            int current_time = 1400;
+           // int current_time = 1400;
             String ans = "";
             int min = Integer.MAX_VALUE;
             List<Integer> keys = new ArrayList(accessTime.keySet());

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="lightGray">#99999A</color>
+    <color name="lightGray2">#AAAAAB</color>
     <color name="white">#FFF</color>
     <color name="darkBlueGray">#212B38</color>
     <color name="backgroundColor">#37465B</color>
@@ -14,6 +15,8 @@
     <color name="lightgreen1">#B2D1AF</color>
     <color name="lightgreen2">#76B370</color>
     <color name="whitegray">#DEDEDE</color>
+    <color name="whitegray2">#E1E1E1</color>
+    <color name="whitegray3">#F1F1F1</color>
     <color name="black">#000000</color>
     <color name="darktour">#35C890</color>
 </resources>

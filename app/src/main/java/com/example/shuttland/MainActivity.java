@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openNearestStationActivity() {
-        Intent intent = new Intent(this,TryModel.class);
-        startActivity(intent);
+
     }
 
 
