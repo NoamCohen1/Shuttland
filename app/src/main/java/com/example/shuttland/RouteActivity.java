@@ -45,6 +45,9 @@ public class RouteActivity extends AppCompatActivity {
         userLocation.setLatitude(bundle.getDouble("lat"));
         selectedBuilding=bundle.getInt("numBuilding");
 
+        TextView dest_text = (TextView) findViewById(R.id.dest);
+       dest_text.setText("       בניין " + selectedBuilding);
+
 
         Location ans_near=model.findNearestStation(userLocation);
         if(ans_near.getProvider().equals("0"))
@@ -80,7 +83,6 @@ public class RouteActivity extends AppCompatActivity {
 
 
         final ImageView accessBtn = (ImageView) findViewById(R.id.accessBtn);
-        final ImageView regularBtn = (ImageView) findViewById(R.id.regularBtn);
         final TextView accessTime=(TextView) findViewById(R.id.accessShuttle);
         final TextView regularTime=(TextView) findViewById(R.id.timeShuttle);
         accessBtn.setOnClickListener(new View.OnClickListener() {

@@ -19,4 +19,11 @@
     <color name="whitegray3">#F1F1F1</color>
     <color name="black">#000000</color>
     <color name="darktour">#35C890</color>
+    <color name="pastelOrange">#FFE9D5</color>
+    <color name="pastelRed">#FF9A8A</color>
+    <color name="pastelBlue">#6FD6DF</color>
+    <color name="pastelGreen">#72E390</color>
+    <color name="bluegreen1">#67B2D1</color>
+    <color name="bluegreen2">#4D99CD</color>
+    <color name="pin">#D72F76</color>
 </resources>
