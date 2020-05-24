@@ -10,7 +10,7 @@
             </item>
             <item android:bottom="2dp" android:left="2dp">
                 <shape>
-                    <solid android:color="@color/darktour"/>
+                    <solid android:color="@color/gray"/>
                     <corners android:radius="80dp"/>
                     <padding android:bottom="10dp" android:left="10dp"
                         android:right="10dp" android:top="10dp" />

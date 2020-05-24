@@ -1,56 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
-    tools:context=".NavigationActivity"
-    android:focusable="true">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/sourceText"
-        android:layout_toRightOf="@id/source"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="165dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img"
+        android:layout_width="0dp"
+        android:layout_height="270dp"
+        android:background="@drawable/blueredmap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeTextType="uniform"
-        android:text="מקור"
-        android:layout_toEndOf="@id/source"
-        android:layout_marginStart="10dp" />
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_header"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/source"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="310dp"
         android:padding="@dimen/activity_horizontal_margin"
-        android:autoSizeTextType="uniform"
-        android:text="מיקומך הנוכחי" />
+        android:background="@drawable/text_rounded"
+        android:fontFamily="@font/apollo"
+        android:text="מיקומך הנוכחי"
+        android:textSize="18sp"
+        android:textColor="@color/lightGray"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-    <TextView
-        android:id="@+id/targetText"
-        android:layout_toRightOf="@id/autocomplete"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="265dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoSizeTextType="uniform"
-        android:text="יעד"
-        android:layout_toEndOf="@id/autocomplete"
-        android:layout_marginStart="10dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
+        android:autoSizeTextType="uniform"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:layout_marginTop="250dp"/>
+        android:hint="לאן תרצה להגיע?"
+        android:textSize="18sp"
+        android:textColorHint="@color/lightGray"
+        android:textColor="@color/black"
+        android:background="@drawable/text_rounded"
+        android:popupBackground="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:dropDownHeight="180dp"
+
+        android:fontFamily="@font/apollo"
+        android:layout_marginTop="410dp"/>
 
     <ImageView
         android:id="@+id/drop_down_img"
@@ -60,32 +80,103 @@
         android:layout_alignRight="@id/autocomplete"
         android:layout_alignBottom="@id/autocomplete"
         android:padding="10dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginLeft="280dp"
         android:src="@mipmap/baseline_arrow_drop_down_black_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_alignEnd="@id/autocomplete" />
 
+
+
     <ImageView
-        android:id="@+id/search_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/autocomplete"
-        android:layout_alignLeft="@id/autocomplete"
-        android:layout_alignBottom="@id/autocomplete"
-        android:padding="10dp"
-        android:layout_marginBottom="5dp"
-        android:src="@mipmap/baseline_search_black_48dp"
-        android:layout_alignStart="@id/autocomplete" />
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="400dp"
+        android:src="@drawable/greenblacksearch"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginRight="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/goButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="540dp"
         android:width="100dp"
-        android:text="חפש" />
+        android:background="@drawable/btn_rounded"
+        android:textColor="@color/whitegray"
+        android:fontFamily="@font/apollo"
+        android:text="חפש"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-</RelativeLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/sourceText"
+        android:layout_toRightOf="@id/source"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="640dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
+        android:text="שעות פעילות השאטל:"
+        android:textSize="19sp"
+        android:layout_toEndOf="@id/source"
+        android:layout_marginStart="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="pa"/>
+    <TextView
+        android:id="@+id/sourceText2"
+        android:layout_toRightOf="@id/source"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="670dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
+        android:text="א-ה בשעות 7:30-20:00"
+        android:layout_toEndOf="@id/source"
+        android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/sourceText3"
+        android:layout_toRightOf="@id/source"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="690dp"
+        android:layout_width="wrap_content"
+        android:background="@null"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
+        android:text="ו בשעות 7:30-13:00"
+        android:layout_toEndOf="@id/source"
+        android:layout_marginStart="10dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 
+</androidx.constraintlayout.widget.ConstraintLayout>
