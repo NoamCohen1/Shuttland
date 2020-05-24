@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //
         stationBtn = (Button) findViewById(R.id.nearStation);
         stationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
