@@ -37,7 +37,7 @@ public class RouteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        shouldUseLayoutRtl();
+       // shouldUseLayoutRtl();
         setContentView(R.layout.activity_route);
 
         Bundle bundle = getIntent().getExtras();

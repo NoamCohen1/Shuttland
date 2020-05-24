@@ -45,7 +45,7 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        shouldUseLayoutRtl();
+       //shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
