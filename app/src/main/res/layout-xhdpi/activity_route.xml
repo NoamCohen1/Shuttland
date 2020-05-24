@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background"
+    tools:context=".RouteActivity">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:background="@drawable/blackedmap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/source"
+        android:layout_width="330dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/text_rounded"
+        android:fontFamily="@font/apollo"
+        android:text="       מיקומך הנוכחי"
+        android:textSize="13sp"
+        android:textColor="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/dest"
+        android:layout_width="330dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/text_rounded"
+        android:fontFamily="@font/apollo"
+        android:text="       יעד"
+        android:textSize="13sp"
+        android:textColor="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <ImageView
+        android:id="@+id/circle"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="295dp"
+        android:src="@drawable/srcpic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/pin"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginLeft="295dp"
+        android:src="@drawable/pin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/navigateBtn"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="נווט"
+        android:padding="6dip"
+        android:background="@drawable/btn_route_rounded"
+        android:textColor="@color/lightGray"
+        android:layout_marginTop="228dp"
+        android:layout_marginRight="250dp"
+        android:fontFamily="@font/apollo"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/srcStation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dip"
+        android:textAlignment="center"
+        android:text="לך אל תחנה "
+        android:textColor="#000"
+        android:layout_marginTop="215dp"
+        android:layout_marginLeft="120dp"
+        android:fontFamily="@font/apollo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/go"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="228dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/walkicon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <ImageView
+        android:id="@+id/accessBtn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="345dp"
+        android:layout_marginRight="250dp"
+        android:src="@drawable/wheelchair"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/timeShuttle"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:padding="18dip"
+        android:text="השאטל יגיע בעוד"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:autoSizeTextType="uniform"
+        android:layout_marginTop="340dp"
+        android:layout_marginLeft="50dp"
+        android:fontFamily="@font/apollo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/clock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/clockicon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="445dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/targetStation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dip"
+        android:text="סע עד תחנה "
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:layout_marginTop="465dp"
+        android:layout_marginLeft="120dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/apollo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+    <ImageView
+        android:id="@+id/drive"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/routeicon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="570dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/navigateBuilding"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:text="נווט"
+        android:padding="6dip"
+        android:background="@drawable/btn_route_rounded"
+        android:textColor="@color/lightGray"
+        android:layout_marginTop="605dp"
+        android:layout_marginRight="250dp"
+        android:fontFamily="@font/apollo"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <TextView
+        android:id="@+id/targetBuilding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="18dip"
+        android:text="לך אל בניין"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="120dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/apollo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/building"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/walkicon"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    <TextView
+        android:id="@+id/accessShuttle"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:padding="18dip"
+        android:text="השאטל יגיע בעוד"
+        android:visibility="invisible"
+        android:textAlignment="center"
+        android:layout_span="5"
+        android:textColor="#000"
+        android:layout_marginTop="320dp"
+        android:layout_marginLeft="50dp"
+        android:fontFamily="@font/apollo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
