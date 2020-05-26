@@ -15,165 +15,198 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/guideline1" />
 
     <View
-        android:id="@+id/view"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="220dp"
         android:layout_marginEnd="8dp"
-
         android:background="@drawable/bg_header"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
     <TextView
         android:id="@+id/source"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="310dp"
+        android:padding="@dimen/activity_horizontal_margin"
         android:background="@drawable/text_rounded"
         android:fontFamily="@font/apollo"
-        android:padding="@dimen/activity_horizontal_margin"
         android:text="מיקומך הנוכחי"
-        android:textAlignment="center"
-        android:textColor="@color/lightGray"
         android:textSize="18sp"
+        android:textColor="@color/lightGray"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline3"
+        />
 
     <AutoCompleteTextView
         android:id="@+id/autocomplete"
+        android:autoSizeTextType="uniform"
         android:layout_width="330dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="410dp"
         android:layout_marginBottom="20dp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/text_rounded"
-        android:dropDownHeight="180dp"
-        android:fontFamily="@font/apollo"
-        android:hint="לאן תרצה להגיע?"
-        android:popupBackground="@color/white"
+        android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textColorHint="@color/lightGray"
+        android:hint="לאן תרצה להגיע?"
         android:textSize="18sp"
+        android:textColorHint="@color/lightGray"
+        android:textColor="@color/black"
+        android:background="@drawable/text_rounded"
+        android:popupBackground="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        android:dropDownHeight="180dp"
+        android:fontFamily="@font/apollo" />
 
     <ImageView
         android:id="@+id/drop_down_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/autocomplete"
-        android:layout_alignEnd="@id/autocomplete"
         android:layout_alignRight="@id/autocomplete"
         android:layout_alignBottom="@id/autocomplete"
-        android:layout_marginLeft="280dp"
-        android:layout_marginTop="410dp"
         android:padding="10dp"
+        android:layout_marginLeft="280dp"
         android:src="@mipmap/baseline_arrow_drop_down_black_48dp"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline4"
+        android:layout_alignEnd="@id/autocomplete" />
+
 
 
     <ImageView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginRight="300dp"
         android:src="@drawable/greenblacksearch"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginRight="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline4.1"
+        />
 
     <Button
         android:id="@+id/goButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="540dp"
         android:width="100dp"
         android:background="@drawable/btn_rounded"
+        android:textColor="@color/whitegray"
         android:fontFamily="@font/apollo"
         android:text="חפש"
-        android:textColor="@color/whitegray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline5"
+        />
 
     <TextView
         android:id="@+id/sourceText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="640dp"
-        android:layout_toEndOf="@id/source"
-        android:layout_toRightOf="@id/source"
-        android:autoSizeTextType="uniform"
+        android:layout_width="wrap_content"
         android:background="@null"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
         android:text="שעות פעילות השאטל:"
         android:textSize="19sp"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        />
 
     <TextView
         android:id="@+id/sourceText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="670dp"
-        android:layout_toEndOf="@id/source"
-        android:layout_toRightOf="@id/source"
-        android:autoSizeTextType="uniform"
+        android:layout_marginTop="25dp"
+        android:layout_width="wrap_content"
         android:background="@null"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
         android:text="א-ה בשעות 7:30-20:00"
+        android:layout_marginStart="10dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        />
 
     <TextView
         android:id="@+id/sourceText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="690dp"
-        android:layout_toEndOf="@id/source"
-        android:layout_toRightOf="@id/source"
-        android:autoSizeTextType="uniform"
+        android:layout_marginTop="45dp"
+        android:layout_width="wrap_content"
         android:background="@null"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/apollo"
+        android:autoSizeTextType="uniform"
         android:text="ו בשעות 7:30-13:00"
+        android:layout_marginStart="10dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6"
+        />
 
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.541"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

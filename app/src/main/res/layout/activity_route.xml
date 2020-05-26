@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@drawable/gradient_background"
+    android:orientation="vertical"
     tools:context=".RouteActivity">
 
 
@@ -16,311 +16,159 @@
         android:background="@drawable/blackedmap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/guideline1" />
+
 
     <TextView
         android:id="@+id/source"
         android:layout_width="330dp"
         android:layout_height="35dp"
-        android:layout_marginTop="30dp"
-
         android:background="@drawable/text_rounded"
         android:fontFamily="@font/apollo"
         android:text="       מיקומך הנוכחי"
-        android:textSize="13sp"
         android:textColor="@color/lightGray"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <TextView
-        android:id="@+id/dest"
-        android:layout_width="330dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="90dp"
-        android:background="@drawable/text_rounded"
-        android:fontFamily="@font/apollo"
-        android:text="       יעד"
-        android:textSize="13sp"
-        android:textColor="@color/lightGray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent"
-        />
     <ImageView
         android:id="@+id/circle"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginTop="39dp"
         android:layout_marginLeft="295dp"
         android:src="@drawable/srcpic"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2.1" />
 
+
+    <TextView
+        android:id="@+id/dest"
+        android:layout_width="330dp"
+        android:layout_height="35dp"
+        android:background="@drawable/text_rounded"
+        android:fontFamily="@font/apollo"
+        android:text="       יעד"
+        android:textColor="@color/lightGray"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
     <ImageView
         android:id="@+id/pin"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="96dp"
         android:layout_marginLeft="295dp"
         android:src="@drawable/pin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline3.1" />
 
     <View
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="195dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/text_rounded"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline4" />
 
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/navigateBtn"
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:text="נווט"
-        android:padding="6dip"
-        android:background="@drawable/btn_route_rounded"
-        android:textColor="@color/lightGray"
-        android:layout_marginTop="228dp"
-        android:layout_marginRight="250dp"
-        android:fontFamily="@font/apollo"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
     <TextView
         android:id="@+id/srcStation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="18dip"
-        android:textAlignment="center"
-        android:text="לך אל תחנה "
-        android:textColor="#000"
-        android:layout_marginTop="215dp"
+        android:layout_marginStart="120dp"
         android:layout_marginLeft="120dp"
         android:fontFamily="@font/apollo"
+        android:padding="18dip"
+        android:text="לך אל תחנה "
+        android:textAlignment="center"
+        android:textColor="#000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/guideline4.1" />
+
+    <Button
+        android:id="@+id/navigateBtn"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginRight="250dp"
+        android:background="@drawable/btn_route_rounded"
+        android:fontFamily="@font/apollo"
+        android:padding="6dip"
+        android:text="נווט"
+        android:textColor="@color/lightGray"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline4.2" />
+
 
     <ImageView
         android:id="@+id/go"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginStart="290dp"
         android:layout_marginLeft="290dp"
         android:src="@drawable/walkicon"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/guideline4.2" />
 
     <View
         android:layout_width="350dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="320dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/text_rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@id/guideline5" />
 
 
     <ImageView
         android:id="@+id/accessBtn"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginTop="345dp"
+        android:layout_marginEnd="250dp"
         android:layout_marginRight="250dp"
         android:src="@drawable/wheelchair"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@id/guideline5.2" />
 
     <TextView
         android:id="@+id/timeShuttle"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/apollo"
         android:padding="18dip"
         android:text="השאטל יגיע בעוד"
         android:textAlignment="center"
         android:textColor="#000"
-        android:autoSizeTextType="uniform"
-        android:layout_marginTop="340dp"
-        android:layout_marginLeft="50dp"
-        android:fontFamily="@font/apollo"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/clock"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="355dp"
-        android:layout_marginLeft="290dp"
-        android:src="@drawable/clockicon"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:layout_width="350dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="445dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/text_rounded"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/targetStation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="18dip"
-        android:text="סע עד תחנה "
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:layout_marginTop="465dp"
-        android:layout_marginLeft="120dp"
-        android:textSize="16sp"
-        android:fontFamily="@font/apollo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-
-    <ImageView
-        android:id="@+id/drive"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="480dp"
-        android:layout_marginLeft="290dp"
-        android:src="@drawable/routeicon"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:layout_width="350dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="570dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/text_rounded"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/navigateBuilding"
-        android:layout_width="50dp"
-        android:layout_height="35dp"
-        android:text="נווט"
-        android:padding="6dip"
-        android:background="@drawable/btn_route_rounded"
-        android:textColor="@color/lightGray"
-        android:layout_marginTop="605dp"
-        android:layout_marginRight="250dp"
-        android:fontFamily="@font/apollo"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-
-    <TextView
-        android:id="@+id/targetBuilding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="18dip"
-        android:text="לך אל בניין"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:layout_marginTop="590dp"
-        android:layout_marginLeft="120dp"
-        android:textSize="16sp"
-        android:fontFamily="@font/apollo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <ImageView
-        android:id="@+id/building"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginLeft="290dp"
-        android:src="@drawable/walkicon"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintLeft_toRightOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toBottomOf="@id/guideline5.1" />
 
 
     <TextView
@@ -328,19 +176,258 @@
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:padding="18dip"
-        android:text="השאטל יגיע בעוד"
+        android:text="השאטל הנגיש יגיע בעוד"
         android:visibility="invisible"
         android:textAlignment="center"
         android:layout_span="5"
         android:textColor="#000"
-        android:layout_marginTop="320dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
         android:fontFamily="@font/apollo"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/guideline5.1"
+        />
 
+    <ImageView
+        android:id="@+id/clock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/clockicon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline5.3" />
+
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6" />
+
+
+    <TextView
+        android:id="@+id/targetStation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:fontFamily="@font/apollo"
+        android:padding="18dip"
+        android:text="סע עד תחנה "
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6.1" />
+
+    <ImageView
+        android:id="@+id/drive"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/routeicon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline6.2" />
+
+    <View
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/text_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline7" />
+
+    <Button
+        android:id="@+id/navigateBuilding"
+        android:layout_width="50dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginRight="250dp"
+        android:background="@drawable/btn_route_rounded"
+        android:fontFamily="@font/apollo"
+        android:padding="6dip"
+        android:text="נווט"
+        android:textColor="@color/lightGray"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline7.2" />
+
+    <TextView
+        android:id="@+id/targetBuilding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="120dp"
+        android:fontFamily="@font/apollo"
+        android:padding="18dip"
+        android:text="לך אל בניין"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline7.1" />
+
+    <ImageView
+        android:id="@+id/building"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="290dp"
+        android:layout_marginLeft="290dp"
+        android:src="@drawable/walkicon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline7.2" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.04" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.053" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.12" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.128" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.27" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.315" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.44" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.474" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5.3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.486" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.64" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.652" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.78" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.81" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.826" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

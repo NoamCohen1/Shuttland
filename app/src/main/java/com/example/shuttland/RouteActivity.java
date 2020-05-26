@@ -1,6 +1,5 @@
 package com.example.shuttland;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -9,16 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
-import static androidx.core.view.ViewCompat.getLayoutDirection;
 
 public class RouteActivity extends AppCompatActivity {
 
@@ -46,7 +43,7 @@ public class RouteActivity extends AppCompatActivity {
         selectedBuilding=bundle.getInt("numBuilding");
 
         TextView dest_text = (TextView) findViewById(R.id.dest);
-       dest_text.setText("       בניין " + selectedBuilding);
+        dest_text.setText("       בניין " + selectedBuilding);
 
 
         Location ans_near=model.findNearestStation(userLocation);
@@ -62,7 +59,6 @@ public class RouteActivity extends AppCompatActivity {
 
         TextView dst_building = (TextView) findViewById(R.id.targetBuilding);
         dst_building.setText("לך אל בניין " + selectedBuilding);
-
 
 
         Button button = (Button) findViewById(R.id.navigateBtn);
