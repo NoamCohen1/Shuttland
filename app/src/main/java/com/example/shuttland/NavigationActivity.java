@@ -53,10 +53,10 @@ public class NavigationActivity extends AppCompatActivity {
         myRef = mFireBase.getReference("shuttles");
 
 
-        //userLocation = getUserLocation();
-        userLocation = new Location("user");
-        userLocation.setLatitude(32.074879);
-        userLocation.setLongitude(34.868378);
+        userLocation = getUserLocation();
+//        userLocation = new Location("user");
+////        userLocation.setLatitude(32.074879);
+////        userLocation.setLongitude(34.868378);
 
 //        final ImageView bus = (ImageView) findViewById(R.id.bus);
 //
@@ -125,7 +125,7 @@ public class NavigationActivity extends AppCompatActivity {
                 if (!parent.getItemAtPosition(position).toString().equals("")) {
                     String selected = parent.getItemAtPosition(position).toString();
                     String[] parts = selected.split(" -");
-                    selectedBuilding = Integer.parseInt(parts[0]);
+                    selectedBuilding = Integer.parseInt(parts[0].trim());
                 }
             }
         });
