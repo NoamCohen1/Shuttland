@@ -42,7 +42,7 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //shouldUseLayoutRtl();
+        //shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -51,13 +51,11 @@ public class NavigationActivity extends AppCompatActivity {
 
 
         userLocation = getUserLocation();
-
         //for checking
 //        userLocation = new Location("user");
-//        userLocation.setLatitude(32.074879);
-//        userLocation.setLongitude(34.868378);
+////        userLocation.setLatitude(32.074879);
+////        userLocation.setLongitude(34.868378);
 
-//        final ImageView bus = (ImageView) findViewById(R.id.bus);
 
         final Button goButton = (Button) findViewById(R.id.goButton);
         goButton.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +107,7 @@ public class NavigationActivity extends AppCompatActivity {
                 if (!parent.getItemAtPosition(position).toString().equals("")) {
                     String selected = parent.getItemAtPosition(position).toString();
                     String[] parts = selected.split(" -");
-                    selectedBuilding = Integer.parseInt(parts[0]);
+                    selectedBuilding = Integer.parseInt(parts[0].trim());
                 }
             }
         });
@@ -195,11 +193,12 @@ public class NavigationActivity extends AppCompatActivity {
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     String value = keyNode.getValue(String.class);
                     String[] location_point = value.split(",");
-                   Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
-                       , Boolean.parseBoolean(location_point[2]));
-                   Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
+                    Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
+                            , Boolean.parseBoolean(location_point[2]));
+                    Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
 
                 }
+
             }
 
             @Override
