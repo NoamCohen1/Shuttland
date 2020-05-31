@@ -13,9 +13,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,29 +50,16 @@ public class NavigationActivity extends AppCompatActivity {
         myRef = mFireBase.getReference("shuttles");
 
 
-        //userLocation = getUserLocation();
-        userLocation = new Location("user");
-        userLocation.setLatitude(32.074879);
-        userLocation.setLongitude(34.868378);
+        userLocation = getUserLocation();
+
+        //for checking
+//        userLocation = new Location("user");
+//        userLocation.setLatitude(32.074879);
+//        userLocation.setLongitude(34.868378);
 
 //        final ImageView bus = (ImageView) findViewById(R.id.bus);
-//
-//       final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.move);
-//       MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-//        myAnim.setInterpolator(interpolator);
-//        bus.startAnimation(myAnim);
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        userLocation.setLatitude(32.0671975);
-//        userLocation.setLongitude(34.840333699999995);
 
         final Button goButton = (Button) findViewById(R.id.goButton);
-//        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.grow);
-//        //AnimationSet set=new AnimationSet(false);
-//        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 20);
-//        myAnim.setInterpolator(interpolator);
-//        goButton.startAnimation(myAnim);
-
-
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -216,14 +200,6 @@ public class NavigationActivity extends AppCompatActivity {
                    Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
 
                 }
-               // Shuttle_string value = dataSnapshot.getValue(Shuttle_string.class);
-//                Log.v("key", "Value is: " + value);
-//                System.out.println("********** " + value);
-//                String[] location_point = value.split(",");
-//                Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
-//                        , Boolean.parseBoolean(location_point[2]));
-//                Shuttle_Map.getInstance().setMap(Integer.parseInt(dataSnapshot.getKey()), info);
-
             }
 
             @Override

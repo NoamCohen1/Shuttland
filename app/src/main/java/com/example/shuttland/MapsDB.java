@@ -46,56 +46,55 @@ public class MapsDB {
     }
 
     public void setStationsDistances() {
-//        // 0->1
-//        distance_of_station.add(Float.valueOf("127"));
-//        //1->2
-//        distance_of_station.add( Float.valueOf("200"));
-//        // 2->3
-//        distance_of_station.add(Float.valueOf("279"));
-//        // 3->4
-//        distance_of_station.add(Float.valueOf("190"));
-//        // 4->5
-//        distance_of_station.add(Float.valueOf("160"));
-//        // 5->6
-//        distance_of_station.add(Float.valueOf("230"));
-//        // 6->7
-//        distance_of_station.add(Float.valueOf("120"));
-//        // 7->8
-//        distance_of_station.add(Float.valueOf("325"));
-//        // 8->9
-//        distance_of_station.add(Float.valueOf("160"));
-//        // 9->10
-//        distance_of_station.add(Float.valueOf("190"));
-//        // 10->11
-//        distance_of_station.add(Float.valueOf("300"));
-//        // 11->12
-//        distance_of_station.add(Float.valueOf("140"));
-//        // 12->13
-//        distance_of_station.add(Float.valueOf("247"));
-//        // 13->14
-//        distance_of_station.add(Float.valueOf("190"));
-//        // 14->15
-//        distance_of_station.add(Float.valueOf("99"));
-//        // 15->16
-//        distance_of_station.add(Float.valueOf("265"));
-//        // 16->0
-//        distance_of_station.add(Float.valueOf("168"));
-
-         //0->1
-        distance_of_station.add(Float.valueOf("140"));
+        // 0->1
+        distance_of_station.add(Float.valueOf("127"));
         //1->2
-        distance_of_station.add( Float.valueOf("160"));
+        distance_of_station.add( Float.valueOf("200"));
         // 2->3
-        distance_of_station.add(Float.valueOf("300"));
+        distance_of_station.add(Float.valueOf("279"));
         // 3->4
+        distance_of_station.add(Float.valueOf("190"));
+        // 4->5
+        distance_of_station.add(Float.valueOf("160"));
+        // 5->6
+        distance_of_station.add(Float.valueOf("230"));
+        // 6->7
         distance_of_station.add(Float.valueOf("120"));
+        // 7->8
+        distance_of_station.add(Float.valueOf("325"));
+        // 8->9
+        distance_of_station.add(Float.valueOf("160"));
+        // 9->10
+        distance_of_station.add(Float.valueOf("190"));
+        // 10->11
+        distance_of_station.add(Float.valueOf("300"));
+        // 11->12
+        distance_of_station.add(Float.valueOf("140"));
+        // 12->13
+        distance_of_station.add(Float.valueOf("247"));
+        // 13->14
+        distance_of_station.add(Float.valueOf("190"));
+        // 14->15
+        distance_of_station.add(Float.valueOf("99"));
+        // 15->16
+        distance_of_station.add(Float.valueOf("265"));
+        // 16->0
+        distance_of_station.add(Float.valueOf("168"));
+
+        //for checking
+//         //0->1
+//        distance_of_station.add(Float.valueOf("140"));
+//        //1->2
+//        distance_of_station.add( Float.valueOf("160"));
+//        // 2->3
+//        distance_of_station.add(Float.valueOf("300"));
+//        // 3->4
+//        distance_of_station.add(Float.valueOf("120"));
 
 
     }
 
     public void setLocation_buildings(){
-        //location_buildings.put(numBuilding,createLocation());
-
         location_buildings.put(100, createLocation("100", 32.065704, 34.840879));
         location_buildings.put(101, createLocation("101", 32.065874, 34.840133));
         location_buildings.put(102, createLocation("102", 32.065997, 34.840855));
@@ -141,7 +140,6 @@ public class MapsDB {
         location_buildings.put(409, createLocation("409", 32.069233, 34.842787));//לא מדוייק
         location_buildings.put(410, createLocation("410", 32.069123, 34.843674));
         location_buildings.put(411, createLocation("411", 32.068930, 34.844232));
-
         location_buildings.put(501, createLocation("501", 32.069910, 34.842495));
         location_buildings.put(502, createLocation("502", 32.070693, 34.843264));
         location_buildings.put(503, createLocation("503", 32.06972687050898, 34.84347663279368));//לא מדוייק
@@ -174,40 +172,41 @@ public class MapsDB {
     }
 
     public void SetStationsLocations() {
-//        addLocation("0", 32.0727493, 34.849301);
-//        addLocation("1", 32.0734411, 34.8483981);
-//        addLocation("2", 32.0735301, 34.846368);
-//        addLocation("3", 32.0723118, 34.844318799999996);
-//        addLocation("4", 32.071165199999996, 34.8429532);
-//        addLocation("5", 32.069904, 34.8420564);
-//        addLocation("6", 32.0681564, 34.840918099999996);
-//        addLocation("7", 32.0671975, 34.840333699999995);
-//        addLocation("8", 32.0655436, 34.8424443);
-//        addLocation("9", 32.0659431, 34.844034199999996);
-//        addLocation("10", 32.0673506, 34.8446212);
-//        addLocation("11", 32.069542, 34.8438793);
-//        addLocation("12", 32.0695559, 34.8423678);
-//        addLocation("13", 32.0711751, 34.8430622);
-//        addLocation("14", 32.0722382, 34.8445136);
-//        addLocation("15", 32.073458699999996, 34.8459821);
-//        addLocation("16", 32.072267499999995, 34.8480397);
-        //ליפשיץ פינת הפרדס
-        addLocation("0", 32.076458, 34.874041);
-        //ניגוני חיים
-        addLocation("1", 32.075804, 34.872970);
-        //תחנת אוטובס שלנו
-        addLocation("2", 32.074821, 34.872397);
-        // קניון גנים
-        addLocation("3", 32.074530, 34.869548);
-        //העצמאות פינת מייזנר
-        addLocation("4", 32.074879, 34.868378);
+        addLocation("0", 32.0727493, 34.849301);
+        addLocation("1", 32.0734411, 34.8483981);
+        addLocation("2", 32.0735301, 34.846368);
+        addLocation("3", 32.0723118, 34.844318799999996);
+        addLocation("4", 32.071165199999996, 34.8429532);
+        addLocation("5", 32.069904, 34.8420564);
+        addLocation("6", 32.0681564, 34.840918099999996);
+        addLocation("7", 32.0671975, 34.840333699999995);
+        addLocation("8", 32.0655436, 34.8424443);
+        addLocation("9", 32.0659431, 34.844034199999996);
+        addLocation("10", 32.0673506, 34.8446212);
+        addLocation("11", 32.069542, 34.8438793);
+        addLocation("12", 32.0695559, 34.8423678);
+        addLocation("13", 32.0711751, 34.8430622);
+        addLocation("14", 32.0722382, 34.8445136);
+        addLocation("15", 32.073458699999996, 34.8459821);
+        addLocation("16", 32.072267499999995, 34.8480397);
 
+        //for checking
+//        //ליפשיץ פינת הפרדס
+//        addLocation("0", 32.076458, 34.874041);
+//        //ניגוני חיים
+//        addLocation("1", 32.075804, 34.872970);
+//        //תחנת אוטובס שלנו
+//        addLocation("2", 32.074821, 34.872397);
+//        // קניון גנים
+//        addLocation("3", 32.074530, 34.869548);
+//        //העצמאות פינת מייזנר
+//        addLocation("4", 32.074879, 34.868378);
     }
 
     public void setBuildingToNearStation() {
-        /////!!!!!!!!!!!!!11
-        //building_to_near_station.put(100, 8);
-        building_to_near_station.put(100, 4);
+        //for checking
+        //building_to_near_station.put(100, 4);
+        building_to_near_station.put(100, 8);
         building_to_near_station.put(101, 7);
         building_to_near_station.put(102, 7);
         building_to_near_station.put(103, 7);
