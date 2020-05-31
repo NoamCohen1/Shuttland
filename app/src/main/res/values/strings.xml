@@ -5,63 +5,68 @@
     <string name="app_name">Shuttland</string>
     <string name="title_activity_maps">Map</string>
     <string name="search_hint">חפש</string>
+    <string name="shuttle_time">שעות פעילות השאטל:</string>
+    <string name="where_to_go">לאן תרצה להגיע?</string>
+    <string name="current_place">מיקומך הנוכחי</string>
+    <string name="sunday_thursday">א–ה בשעות 7:30–20:00</string>
+    <string name="friday">ו בשעות 7:30–13:00</string>
 
     <string-array name="building_array">
         <item> </item>
         <item><font color="#000000">100 - בית החיות</font></item>
         <item><font color="#000000">101 - מעונות סטודנטים ע"ש שרמן</font></item>
         <item><font color="#000000">102 - מעבדות למיקרוביולוגיה</font></item>
-        <item><font color="#000000">103 - מעונות סטודנטים ע"ש נסים ד גאון</font></item>
-        <item><font color="#000000">104 - מעונות סטודנטים ע"ש א וולפסון</font></item>
+        <item><font color="#000000">103 - מעונות סטודנטים ע"ש גאון</font></item>
+        <item><font color="#000000">104 - מעונות סטודנטים ע"ש וולפסון</font></item>
         <item><font color="#000000">105 - כיתות אקסודוס</font></item>
         <item><font color="#000000">106 - מעונות סטודנטים ע"ש מוסקוביץ' פרשין</font></item>
         <item><font color="#000000">107 - בית הסטודנט ע"ש ג'רום סיסלמן</font></item>
         <item><font color="#000000">108 - מעונות סטודנטים ע"ש סטולמן</font></item>
         <item><font color="#000000">109 - בית לאוטרמן</font></item>
-        <item><font color="#000000">110 - הפארק ע"ש בוב שאפל</font></item>
+        <item><font color="#000000">110 - פארק שאפל</font></item>
 
-        <item><font color="#000000">201 - ביולוגיה סביבתית ופוריות הגבר ע"ש חיים ורוז פריימן</font></item>
+        <item><font color="#000000">201 - ביולוגיה סביבתית ופוריות הגבר</font></item>
         <item><font color="#000000">202 - פיסיקה המכון לחקר המוצק</font></item>
-        <item><font color="#000000">203 - פיסיקה ע"ש שטרן</font></item>
-        <item><font color="#000000">204 - המרכז למחקר רפואי-אבחוני ע"ש גונדה (גולדשמיד)</font></item>
-        <item><font color="#000000">205 - המרכז למדעי החי ע"ש קונין-לוננפלד</font></item>
-        <item><font color="#000000">206 - הטריפלקס לננוטכנולוגיה ע"ש לסלי וסוזן גונדה (גולדשמיד)</font></item>
-        <item><font color="#000000">207 - בנין כימיה ע"ש הרי קרפל</font></item>
-        <item><font color="#000000">208 - המרכז לחקר הסרטן ע"ש מרילין פינקלר</font></item>
-        <item><font color="#000000">209 - המכון לטכנולוגיה מתקדמת ע"ש ג"ק ופרל רזניק</font></item>
-        <item><font color="#000000">211 - כימיה ע"ש בן ובלה לכטר</font></item>
-        <item><font color="#000000">212 - מדעי החי ע"ש סוויסה</font></item>
-        <item><font color="#000000">213 - בניין מדעי החברה ע"ש קהילת מקסיקו</font></item>
-        <item><font color="#000000">214 - מרכז לגילוי מוקדם של הסרטן ע"ש ג"רום שוטנשטיין</font></item>
-        <item><font color="#000000">215 - המרכז לאנרגיה ע"ש מותק ומרים קינדרלרר</font></item>
-        <item><font color="#000000">216 - מרכז המחשבים והמתמטיקה ע"ש עוזיאל שפיגל יד עוזיאל</font></item>
+        <item><font color="#000000">203 - פיסיקה</font></item>
+        <item><font color="#000000">204 - המרכז למחקר רפואי-אבחוני</font></item>
+        <item><font color="#000000">205 - המרכז למדעי החי</font></item>
+        <item><font color="#000000">206 - הטריפלקס לננוטכנולוגיה</font></item>
+        <item><font color="#000000">207 - בנין כימיה</font></item>
+        <item><font color="#000000">208 - המרכז לחקר הסרטן</font></item>
+        <item><font color="#000000">209 - המכון לטכנולוגיה מתקדמת</font></item>
+        <item><font color="#000000">211 - כימיה</font></item>
+        <item><font color="#000000">212 - מדעי החי</font></item>
+        <item><font color="#000000">213 - בניין מדעי החברה מקסיקו</font></item>
+        <item><font color="#000000">214 - מרכז לגילוי מוקדם של הסרטן</font></item>
+        <item><font color="#000000">215 - המרכז לאנרגיה</font></item>
+        <item><font color="#000000">216 - בניין מדעי המחשב ומתמטיקה</font></item>
         <item><font color="#000000">217 - בית עליזה ומנחם בגין</font></item>
 
         <item><font color="#000000">300 - מתחם ע"ש איזידור ואידה לוקר</font></item>
-        <item><font color="#000000">301 - המרכז הבינלאומי לקונגרסים ע"ש שמשון וחנה פלדמן</font></item>
+        <item><font color="#000000">301 - המרכז הבינלאומי לקונגרסים ע"ש פלדמן</font></item>
         <item><font color="#000000">302 - לוגיסטיקה</font></item>
         <item><font color="#000000">303 - אחזקה</font></item>
         <item><font color="#000000">304 - אולמות הרצאה שלייפר</font></item>
-        <item><font color="#000000">305 - משפטים ע"ש ארל וג'ני לון</font></item>
-        <item><font color="#000000">306 - האגף למשפט מקרקעין ע"ש ז'אן ומוריס בנין</font></item>
-        <item><font color="#000000">307 - המרכז למבקרים ומצפה לב הקמפוס ע"ש ונגרובסקי</font></item>
+        <item><font color="#000000">305 - משפטים </font></item>
+        <item><font color="#000000">306 - האגף למשפט מקרקעין</font></item>
+        <item><font color="#000000">307 - המרכז למבקרים ומצפה לב הקמפוס</font></item>
 
-        <item><font color="#000000">401 - הספריה המרכזית ע"ש וורצוויילר</font></item>
-        <item><font color="#000000">402 - מנהלה ע"ש סטולמן</font></item>
+        <item><font color="#000000">401 - הספריה המרכזית</font></item>
+        <item><font color="#000000">402 - מנהלה</font></item>
         <item><font color="#000000">403 - בית הספר לחינוך ע"ש צ'רלס גרוסברג</font></item>
-        <item><font color="#000000">404 - מדעי הרוח ע"ש צ'רלס וולפסון</font></item>
-        <item><font color="#000000">405 - המדרשה-בית יהודית</font></item>
+        <item><font color="#000000">404 - מדעי הרוח</font></item>
+        <item><font color="#000000">405 - המדרשה</font></item>
         <item><font color="#000000">406 - בנק מזרחי-טפחות</font></item>
-        <item><font color="#000000">407 - המרכז לייעוץ לסטודנטים ע"ש מריה פינקל ורות רקמן</font></item>
+        <item><font color="#000000">407 - המרכז לייעוץ לסטודנטים ע"ש רקמן</font></item>
         <item><font color="#000000">408 - ביה"ס לחינוך ע"ש אברהם קרוק</font></item>
-        <item><font color="#000000">409 - בית הסגל ע"ש סלומון קרוק</font></item>
-        <item><font color="#000000">410 - מדעי היהדות ע"ש ברוך ורות רפפורט</font></item>
+        <item><font color="#000000">409 - בית הסגל</font></item>
+        <item><font color="#000000">410 - מדעי היהדות</font></item>
         <item><font color="#000000">411 - המכון הגבוה לתורה בית שאול</font></item>
 
-        <item><font color="#000000">501 - מרכז הספורט ע"ש סר מייקל סובל</font></item>
+        <item><font color="#000000">501 - מרכז הספורט</font></item>
         <item><font color="#000000">502 - כיתות ומשרדים</font></item>
         <item><font color="#000000">503 - כיתות ומשרדים</font></item>
-        <item><font color="#000000">504 - כלכלה ומינהל עסקים ע"ש דניאל אברהם</font></item>
+        <item><font color="#000000">504 - כלכלה ומינהל עסקים</font></item>
         <item><font color="#000000">505 - כיתות אקסודוס ע"ש אהרון ורחל דהאן</font></item>
         <item><font color="#000000">506 - מעונות סטודנטים ע"ש גרוז / אלברט הוברט</font></item>
         <item><font color="#000000">507 - בית מורשת ישראל ע"ש משפחת יעקב ופייגא נגל</font></item>
@@ -72,16 +77,16 @@
         <item><font color="#000000">605 - בנין ללימודי תארים מתקדמים ע"ש משפחת ג'רום ל. שטרן</font></item>
 
         <item><font color="#000000">801 - כיכר שנים עשר השבטים ע"ש פיטר ואליקי רזפקה</font></item>
-        <item><font color="#000000">802 - מעון יום גריידל וויספלד</font></item>
+        <item><font color="#000000">802 - מעון יום</font></item>
 
-        <item><font color="#000000">901 - המרכז לחקר המוח ע"ש לסלי וסוזאן גונדה (גולדשמיד)</font></item>
-        <item><font color="#000000">902 - בנין פסיכולוגיה ע"ש אנה ומקס ווב ומשפחתם</font></item>
-        <item><font color="#000000">905 - בניין בית הספר לחינוך ע"ש שמעון בן-יוסף</font></item>
+        <item><font color="#000000">901 - המרכז לחקר המוח</font></item>
+        <item><font color="#000000">902 - בנין פסיכולוגיה</font></item>
+        <item><font color="#000000">905 - בניין בית הספר לחינוך</font></item>
         <item><font color="#000000">906 - מבנה תשתיות (תת"ק)</font></item>
 
         <item><font color="#000000">1002 - מרכז סמי שמעון ללימודי פילוסופיה, אתיקה ומחשבת ישראל</font></item>
-        <item><font color="#000000">1004 - הבנין ללימודי שפות ע"ש פרד וברברה קורט</font></item>
-        <item><font color="#000000">1005 - בנין מוסיקה ע"ש מרקוס ואן רוזנברג</font></item>
+        <item><font color="#000000">1004 - הבנין ללימודי שפות</font></item>
+        <item><font color="#000000">1005 - בנין מוסיקה</font></item>
 
         <item><font color="#000000">1102 - הנדסה</font></item>
         <item><font color="#000000">1103 - הנדסה</font></item>
