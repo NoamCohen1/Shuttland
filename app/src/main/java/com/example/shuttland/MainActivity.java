@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -18,17 +20,18 @@ public class MainActivity extends AppCompatActivity {
     private Button navButton;
     private Button stationBtn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //
+        final Client c = new Client();
         stationBtn = (Button) findViewById(R.id.nearStation);
         stationBtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                openNearestStationActivity();
+                weatherActivity();
             }
         });
 
@@ -48,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityNavigation() {
         Intent intent = new Intent(this, NavigationActivity.class);
+        startActivity(intent);
+    }
+
+    public void weatherActivity() {
+        Intent intent = new Intent(this, Weather.class);
         startActivity(intent);
     }
 

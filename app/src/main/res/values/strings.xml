@@ -1,7 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#37465B"
-    android:textColor="#000000"
-    >
+<resources xmlns:android="http://schemas.android.com/apk/res/android" android:background="#37465B" android:textColor="#000000">
     <string name="app_name">Shuttland</string>
     <string name="title_activity_maps">Map</string>
     <string name="search_hint">חפש</string>
@@ -96,9 +93,6 @@
         <item><font color="#000000">1401 - מרכז וואהל</font></item>
         <item><font color="#000000">1501 - פארק האחדות ע"ש משפחת דהאן</font></item>
         <item><font color="#000000">1502 - טיילת מרכזית ע"ש לילי שאפל</font></item>
-
-
-
 
 
     </string-array>
