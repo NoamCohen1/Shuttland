@@ -1,12 +1,20 @@
 package com.example.shuttland;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,31 +32,32 @@ public class RouteActivity extends AppCompatActivity {
     private static final int END_HOUR_FRIDAY = 1300;
 
 
-     Location userLocation= new Location("user");
-     int selectedBuilding;
-     boolean isAccess = false;
-     Map<Integer, String> accessTime = MapsDB.getInstance().getAccessTime();
+    Location userLocation = new Location("user");
+    int selectedBuilding;
+    boolean isAccess = false;
+    Map<Integer, String> accessTime = MapsDB.getInstance().getAccessTime();
     private NavigationModel model = new NavigationModel();
-    private boolean accessMode=false;
+    private boolean accessMode = false;
+    private Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // shouldUseLayoutRtl();
+        // shouldUseLayoutRtl();
         setContentView(R.layout.activity_route);
-
+        client=new Client();
         Bundle bundle = getIntent().getExtras();
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
-        selectedBuilding=bundle.getInt("numBuilding");
+        selectedBuilding = bundle.getInt("numBuilding");
 
         TextView dest_text = (TextView) findViewById(R.id.dest);
         dest_text.setText("       בניין " + selectedBuilding);
 
 
-        Location ans_near=model.findNearestStation(userLocation);
-        if(ans_near.getProvider().equals("0"))
-            ans_near=MapsDB.getInstance().getStations().get(1);
+        Location ans_near = model.findNearestStation(userLocation);
+        if (ans_near.getProvider().equals("0"))
+            ans_near = MapsDB.getInstance().getStations().get(1);
         final Location userStation = ans_near;
         int final_station = MapsDB.getInstance().getBuilding_to_near_station().get(selectedBuilding);
         final Location final_station_location = MapsDB.getInstance().getStations().get(final_station);
@@ -77,16 +86,24 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
 
+        Button btnReport = (Button) findViewById(R.id.reportBtn);
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openReport(v);
+            }
+        });
+
 
         final ImageView accessBtn = (ImageView) findViewById(R.id.accessBtn);
-        final TextView accessTime=(TextView) findViewById(R.id.accessShuttle);
-        final TextView regularTime=(TextView) findViewById(R.id.timeShuttle);
+        final TextView accessTime = (TextView) findViewById(R.id.accessShuttle);
+        final TextView regularTime = (TextView) findViewById(R.id.timeShuttle);
         accessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!accessMode) {
                     isAccess = true;
-                    accessMode=true;
+                    accessMode = true;
                     accessBtn.setImageResource(R.drawable.shuttle_icon);
                     accessTime.setVisibility(View.VISIBLE);
                     regularTime.setVisibility(View.INVISIBLE);
@@ -111,16 +128,14 @@ public class RouteActivity extends AppCompatActivity {
                         }
                     });
                     th.start();
-                }else{
-                    accessMode=false;
+                } else {
+                    accessMode = false;
                     accessTime.setVisibility(View.INVISIBLE);
                     regularTime.setVisibility(View.VISIBLE);
                     accessBtn.setImageResource(R.drawable.wheelchair);
                 }
             }
         });
-
-
 
 
         final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
@@ -132,15 +147,14 @@ public class RouteActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            int time = updateTime(isAccess,nearsetShuttle,userStationTemp, userStation);
+                            int time = updateTime(isAccess, nearsetShuttle, userStationTemp, userStation);
                             updateMsg(time);
 
                         }
                     });
                     try {
                         Thread.sleep(20000);
-                    }
-                    catch (InterruptedException e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -149,9 +163,8 @@ public class RouteActivity extends AppCompatActivity {
         th.start();
 
 
-
         TextView destText = (TextView) findViewById(R.id.targetStation);
-        destText.setText("סע עד תחנה "+ final_station);
+        destText.setText("סע עד תחנה " + final_station);
 
     }
 
@@ -166,22 +179,22 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
-    public int updateTime(boolean isAccess,int nearsetShuttle, Location userStationTemp, Location userStation) {
-        int time=0;
-        boolean is_find_shuttle=true;
-        int nearesetShuttleTemp=nearsetShuttle;
-        if(nearesetShuttleTemp==Integer.MAX_VALUE){
-            is_find_shuttle=false;
-            time=10;
+    public int updateTime(boolean isAccess, int nearsetShuttle, Location userStationTemp, Location userStation) {
+        int time = 0;
+        boolean is_find_shuttle = true;
+        int nearesetShuttleTemp = nearsetShuttle;
+        if (nearesetShuttleTemp == Integer.MAX_VALUE) {
+            is_find_shuttle = false;
+            time = 10;
             if (isAccess) {
                 time = Integer.MAX_VALUE;
             }
-            nearesetShuttleTemp=model.findNearestShuttle(userStation, isAccess);
-            if(nearesetShuttleTemp!=Integer.MAX_VALUE)
-                is_find_shuttle=true;
+            nearesetShuttleTemp = model.findNearestShuttle(userStation, isAccess);
+            if (nearesetShuttleTemp != Integer.MAX_VALUE)
+                is_find_shuttle = true;
 
         }
-        if(is_find_shuttle){
+        if (is_find_shuttle) {
             Location shuttleLoc = new Location("user");
             shuttleLoc.setLatitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().latitude);
             shuttleLoc.setLongitude(Shuttle_Map.getInstance().getShuttle_infoMap().get(nearesetShuttleTemp).getLocation().longitude);
@@ -190,22 +203,22 @@ public class RouteActivity extends AppCompatActivity {
         return time;
     }
 
-    public void updateMsg(int time ){
+    public void updateMsg(int time) {
         TextView timeText = (TextView) findViewById(R.id.timeShuttle);
 
-        Date date=new Date();
+        Date date = new Date();
 //                            String day = String.format("%E", date ).toLowerCase();
 
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
 
-        if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR_FRIDAY,c))){
+        if ((day == 7) || (day == 6 && !validTime(BEGIN_HOUR, END_HOUR_FRIDAY, c))) {
             timeText.setText("השאטל הבא יצא ביום ראשון ב-7:30 בבוקר");
             return;
         }
 
-        if(!validTime(BEGIN_HOUR,END_HOUR,c)){
+        if (!validTime(BEGIN_HOUR, END_HOUR, c)) {
             timeText.setText("השאטל הבא יצא ב-7:30 בבוקר");
             return;
         }
@@ -217,24 +230,24 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
-    public void updateMsgForAccess(int time){
+    public void updateMsgForAccess(int time) {
         TextView timeText = (TextView) findViewById(R.id.accessShuttle);
-       // timeText.setVisibility(View.VISIBLE);
+        // timeText.setVisibility(View.VISIBLE);
 
 
-        Date date=new Date();
+        Date date = new Date();
 //                            String day = String.format("%E", date ).toLowerCase();
 
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
 
-        if((day==7)||(day==6 && !validTime(BEGIN_HOUR,END_HOUR_FRIDAY,c))){
+        if ((day == 7) || (day == 6 && !validTime(BEGIN_HOUR, END_HOUR_FRIDAY, c))) {
             timeText.setText("השאטל הנגיש הבא יצא ביום ראשון ב-7:30 בבוקר");
             return;
         }
 
-        if(!validTime(BEGIN_HOUR,END_HOUR,c)){
+        if (!validTime(BEGIN_HOUR, END_HOUR, c)) {
             timeText.setText("השאטל הנגיש הבא יצא ב-7:30 בבוקר");
             return;
         }
@@ -242,43 +255,79 @@ public class RouteActivity extends AppCompatActivity {
         if (time == Integer.MAX_VALUE) {
             int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
             int temp;
-           // int current_time = 1400;
+            // int current_time = 1400;
             String ans = "";
             int min = Integer.MAX_VALUE;
             List<Integer> keys = new ArrayList(accessTime.keySet());
-            for (int i = 0 ; i < keys.size(); i++){
-                 temp = keys.get(i) - current_time;
-                 if (temp > 0 && temp < min) {
-                     min = temp;
-                     ans = accessTime.get(keys.get(i));
-                 }
+            for (int i = 0; i < keys.size(); i++) {
+                temp = keys.get(i) - current_time;
+                if (temp > 0 && temp < min) {
+                    min = temp;
+                    ans = accessTime.get(keys.get(i));
+                }
             }
             timeText.setText("השאטל הנגיש יוצא ב - " + ans);
 
-        }
-        else if (time == 0) {
+        } else if (time == 0) {
             timeText.setText("השאטל מגיע כעת");
         } else {
             timeText.setText("השאטל הנגיש יגיע בעוד  " + time + " דקות");
         }
 
     }
+
     public void openActivityNearStation(Location src, Location dest) {
         // move parameters - nearest station, user location
         // move back
         Intent intent = new Intent(this, MapsActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putDouble("srcLat",src.getLatitude());
-        bundle.putDouble("srcLon",src.getLongitude());
-        bundle.putDouble("destLat",dest.getLatitude());
-        bundle.putDouble("destLon",dest.getLongitude());
+        bundle.putDouble("srcLat", src.getLatitude());
+        bundle.putDouble("srcLon", src.getLongitude());
+        bundle.putDouble("destLat", dest.getLatitude());
+        bundle.putDouble("destLon", dest.getLongitude());
         intent.putExtras(bundle);
         startActivity(intent);
     }
 
-    public  Boolean validTime(int from, int to, Calendar c){
+    public Boolean validTime(int from, int to, Calendar c) {
         int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
         return (to > from && t >= from && t <= to || to < from && (t >= from || t <= to));
     }
 
-}
+
+    public void openReport(View view) {
+        Intent intent = new Intent(this, ReportActivity.class);
+        startActivity(intent);
+    }
+
+//        // inflate the layout of the popup window
+//        LayoutInflater inflater = (LayoutInflater)
+//                getSystemService(LAYOUT_INFLATER_SERVICE);
+//        View popupView = inflater.inflate(R.layout.activity_report, null);
+//
+//
+//        // create the popup window
+//        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+//        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+//        boolean focusable = true; // lets taps outside the popup also dismiss it
+//        final Dialog popupWindow = new Dialog(width, height, focusable);
+//
+//        // show the popup window
+//        // which view you pass in doesn't matter, it is only used for the window tolken
+//        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+//
+//        // dismiss the popup window when touched
+//        popupView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                popupWindow.dismiss();
+//                client.disconnect();
+//                return true;
+//            }
+//        });
+    }
+
+
+
+
+

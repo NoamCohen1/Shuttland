@@ -48,7 +48,7 @@ public class Weather extends AppCompatActivity {
                     centi = Math.round(centi);
                     int i = (int)centi;
                     t1.setText(i);
-                    client.sendMessage(i);
+                    client.sendMessage(i,"");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

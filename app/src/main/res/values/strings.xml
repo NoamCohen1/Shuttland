@@ -4,6 +4,7 @@
     <string name="search_hint">חפש</string>
     <string name="shuttle_time">שעות פעילות השאטל:</string>
     <string name="where_to_go">לאן תרצה להגיע?</string>
+    <string name="shuttle_full">מהי רמת העומס בשאטל?</string>
     <string name="current_place">מיקומך הנוכחי</string>
     <string name="sunday_thursday">א–ה בשעות 7:30–20:00</string>
     <string name="friday">ו בשעות 7:30–13:00</string>

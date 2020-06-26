@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog"
+    tools:context=".ReportActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/apollo"
+        android:text="@string/shuttle_full"
+        app:layout_constraintTop_toTopOf="@id/guideline0"
+        app:layout_constraintRight_toRightOf="@id/guideline3"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        />
+    <Button
+        android:id="@+id/fullShuttle"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:background="@color/red"
+        android:fontFamily="@font/apollo"
+        android:padding="6dip"
+        android:text="עמוס"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/guideline1"
+         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
+    <Button
+        android:id="@+id/halfFullShuttle"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:background="@color/yellow"
+        android:fontFamily="@font/apollo"
+        android:padding="6dip"
+        android:text="עמוס למחצה"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
+    <Button
+        android:id="@+id/emptyShuttle"
+        android:layout_width="65dp"
+        android:layout_height="38dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/green"
+        android:fontFamily="@font/apollo"
+        android:padding="6dip"
+        android:text="פנוי"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintRight_toRightOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
