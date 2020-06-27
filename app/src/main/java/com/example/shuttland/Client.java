@@ -13,9 +13,12 @@ import java.util.Date;
 
 public class Client {
     String ip = "52.201.126.29";
+    //String ip = "10.0.2.2"; //without cloud
     int port = 3001;
     PrintWriter mBufferOut;
     Socket socket;
+    Thread connect_thread;
+
     public void Connect() {
 
         Runnable runable = new Runnable(){
@@ -34,20 +37,25 @@ public class Client {
 
             }
         };
-        Thread thread = new Thread(runable);
-        thread.start();
+        connect_thread = new Thread(runable);
+        connect_thread.start();
     }
-    public void sendMessage(final int message_type,String y) {
+    public void sendMessage(final int message_type,int weather, String y) {
+        Connect();
         Date date=new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
         int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
         String range_time=findRange(current_time);
-        if(range_time.equals("invalid time"))
-            return;
+        String day_str=convertDay(day);
+//        if(range_time.equals("invalid time")|| day_str.equals("invalid time")){
+//            disconnect();
+//            return;
+//        }
         String isBreak= ifBreak(current_time);
-        String temp=message_type+","+day+","+isBreak+","+range_time;
+        String weather_type=temp_range(weather);
+        String temp=message_type+","+weather_type+","+day_str+","+isBreak+","+range_time;
         if(message_type==1) {
             temp += "," + y;
         }
@@ -55,11 +63,16 @@ public class Client {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
+                try {
+                    connect_thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 if (mBufferOut != null) {
                     mBufferOut.println(msg);
                     mBufferOut.flush();
                 }
-                disconnect();
+               disconnect();
             }
         };
         Thread thread = new Thread(runnable);
@@ -82,6 +95,28 @@ public class Client {
         return "invalid time";
     }
 
+    public String convertDay(int day){
+        if(day==1){
+            return "sunday";
+        }
+        if(day==2){
+            return "monday";
+        }
+        if(day==3){
+            return "tuesday";
+        }
+        if(day==4){
+            return "wednesday";
+        }
+        if(day==5){
+            return "thursday";
+        }
+        if(day==6){
+            return "friday";
+        }
+       return "invalid time";
+    }
+
     public String ifBreak (int curr_time){
         if((curr_time>730&& curr_time<800)||(curr_time>830&& curr_time<900)
             ||(curr_time>930&& curr_time<1000) || (curr_time>1130&& curr_time<1200)
@@ -89,6 +124,19 @@ public class Client {
             return "yes";
 
         return "no";
+    }
+
+    public String temp_range(int temp){
+        if(temp<17){
+            return "rainy";
+        }
+        if(temp<22){
+            return "overcast";
+        }
+        if(temp<29){
+            return "nice";
+        }
+        return "sunny";
     }
 
     public void disconnect() {

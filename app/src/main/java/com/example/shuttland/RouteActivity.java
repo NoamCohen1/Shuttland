@@ -1,6 +1,8 @@
 package com.example.shuttland;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
@@ -18,6 +20,15 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,7 +101,7 @@ public class RouteActivity extends AppCompatActivity {
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openReport(v);
+                openDialog();
             }
         });
 
@@ -294,37 +305,77 @@ public class RouteActivity extends AppCompatActivity {
         return (to > from && t >= from && t <= to || to < from && (t >= from || t <= to));
     }
 
+    public void findWeather(final int type_message, final String y){
+  //      final TextView t1 = (TextView)findViewById(R.id.gal);
+        String key = "7bbeff127d7275e0bdab8ad3a6220fb1";
+        String location="lat="+userLocation.getLatitude()+"&lon="+userLocation.getLongitude();
+        String url = "https://api.openweathermap.org/data/2.5/weather?"+location+"&appid="+key;
+        JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject main_obj = response.getJSONObject("main");
+                    String temp = String.valueOf(main_obj.getDouble("feels_like"));
+                    int weather=convart_celsius(temp);
+                    client.sendMessage(type_message,weather,y);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
 
-    public void openReport(View view) {
-        Intent intent = new Intent(this, ReportActivity.class);
-        startActivity(intent);
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(jor);
     }
 
-//        // inflate the layout of the popup window
-//        LayoutInflater inflater = (LayoutInflater)
-//                getSystemService(LAYOUT_INFLATER_SERVICE);
-//        View popupView = inflater.inflate(R.layout.activity_report, null);
-//
-//
-//        // create the popup window
-//        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-//        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-//        boolean focusable = true; // lets taps outside the popup also dismiss it
-//        final Dialog popupWindow = new Dialog(width, height, focusable);
-//
-//        // show the popup window
-//        // which view you pass in doesn't matter, it is only used for the window tolken
-//        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-//
-//        // dismiss the popup window when touched
-//        popupView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                popupWindow.dismiss();
-//                client.disconnect();
-//                return true;
-//            }
-//        });
+    public int convart_celsius(String weather){
+        double temp_int = Double.parseDouble(weather);
+        double centi = temp_int-273.15;
+        centi = Math.round(centi);
+        return (int)centi;
+    }
+
+
+    public void openDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("מהי רמת העומס?");
+        builder.setMessage("         ");
+
+        // add the buttons
+        builder.setPositiveButton("עמוס", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               findWeather(1,"crowded");
+            }
+        });
+        builder.setNegativeButton("עמוס למחצה", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                findWeather(1,"not crowded");
+            }
+        });
+        builder.setNeutralButton("פנוי", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                findWeather(1,"empty");
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    public void wait_for_response(){
+
+    }
+
     }
 
 
