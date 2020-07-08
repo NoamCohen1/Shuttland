@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class Client {
     String ip = "52.201.126.29";
-    //String ip = "10.0.2.2"; //without cloud
+   // String ip = "10.0.2.2"; //without cloud
     int port = 3001;
     PrintWriter mBufferOut;
     Socket socket;
