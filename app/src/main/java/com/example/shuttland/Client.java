@@ -1,9 +1,11 @@
 package com.example.shuttland;
+
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -16,11 +18,11 @@ public class Client {
    // String ip = "10.0.2.2"; //without cloud
     int port = 3001;
     PrintWriter mBufferOut;
+    BufferedReader mBufferIn;
     Socket socket;
     Thread connect_thread;
 
     public void Connect() {
-
         Runnable runable = new Runnable(){
             @Override
             public void run(){
@@ -30,6 +32,7 @@ public class Client {
                     socket = new Socket(serverAddr, port);
                     mBufferOut = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()))
                             , true);
+                    mBufferIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 } catch (IOException e) {
                     Log.e("TCP", "C: Error", e);
                     System.out.println(e.toString());
@@ -71,6 +74,10 @@ public class Client {
                 if (mBufferOut != null) {
                     mBufferOut.println(msg);
                     mBufferOut.flush();
+                }
+                if (mBufferIn != null) {
+                    String data = readServerMsg();
+                    Log.d("serverRes", data);
                 }
                disconnect();
             }
@@ -149,5 +156,21 @@ public class Client {
                 System.out.println((e.toString()));
             }
         }
+    }
+
+    public String readServerMsg() {
+        String data = "";
+        if (socket.isConnected()) {
+            try {
+                data = mBufferIn.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if (data == null) {
+                data = "";
+            }
+        }
+        return data;
     }
 }

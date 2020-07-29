@@ -193,8 +193,10 @@ public class NavigationActivity extends AppCompatActivity {
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     String value = keyNode.getValue(String.class);
                     String[] location_point = value.split(",");
+                    int counter = Shuttle_Map.getInstance().getCounter(Integer.parseInt(keyNode.getKey()));
                     Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
                             , Boolean.parseBoolean(location_point[2]));
+                    info.setCounter(counter);
                     Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
 
                 }

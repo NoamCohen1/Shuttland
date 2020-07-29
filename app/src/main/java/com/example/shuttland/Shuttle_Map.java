@@ -57,4 +57,9 @@ public class Shuttle_Map {
         }
         return access_active;
     }
+
+    public int getCounter(Integer key) {
+        return this.shuttle_infoMap.get(key).getCounter();
+    }
+
 }
