@@ -1,22 +1,16 @@
 package com.example.shuttland;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +44,7 @@ public class RouteActivity extends AppCompatActivity {
     private NavigationModel model = new NavigationModel();
     private boolean accessMode = false;
     private Client client;
+    private TextView load_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,10 @@ public class RouteActivity extends AppCompatActivity {
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
         selectedBuilding = bundle.getInt("numBuilding");
+
+        load_text = (TextView) findViewById(R.id.shuttleLoad);
+
+        findWeather(2, "");
 
         TextView dest_text = (TextView) findViewById(R.id.dest);
         dest_text.setText("       בניין " + selectedBuilding);
@@ -245,7 +244,6 @@ public class RouteActivity extends AppCompatActivity {
         TextView timeText = (TextView) findViewById(R.id.accessShuttle);
         // timeText.setVisibility(View.VISIBLE);
 
-
         Date date = new Date();
 //                            String day = String.format("%E", date ).toLowerCase();
 
@@ -316,8 +314,27 @@ public class RouteActivity extends AppCompatActivity {
                 try {
                     JSONObject main_obj = response.getJSONObject("main");
                     String temp = String.valueOf(main_obj.getDouble("feels_like"));
-                    int weather=convart_celsius(temp);
-                    client.sendMessage(type_message,weather,y);
+                    final int weather=convart_celsius(temp);
+
+                    Thread th = new Thread(new Runnable() {
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String data = client.sendMessage(type_message,weather,y);
+                                    if (data.equals("empty")) {
+                                        data = "אין";
+                                    } else if (data.equals("crowded")) {
+                                        data = "עמוס מאוד";
+                                    } else {
+                                        data = "עומס קל";
+                                    }
+                                    load_text.setText("מידת העומס המשוערת: " + data);
+                                }
+                            });
+                        }
+                    });
+                    th.start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -184,6 +184,23 @@
         app:layout_constraintTop_toBottomOf="@id/guideline5.1"
         />
 
+
+    <TextView
+        android:id="@+id/shuttleLoad"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/apollo"
+        android:padding="18dip"
+        android:text="מידת העומס:"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline5.1.5" />
+
     <ImageView
         android:id="@+id/clock"
         android:layout_width="30dp"
@@ -388,7 +405,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.47" />
+        app:layout_constraintGuide_percent="0.455" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5.1.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.515" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5.2"

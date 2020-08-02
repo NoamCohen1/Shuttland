@@ -12,6 +12,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Client {
     String ip = "52.201.126.29";
@@ -43,9 +47,10 @@ public class Client {
         connect_thread = new Thread(runable);
         connect_thread.start();
     }
-    public void sendMessage(final int message_type,int weather, String y) {
+    public String sendMessage(final int message_type, int weather, String y){
         Connect();
         Date date=new Date();
+        String data = "";
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
@@ -75,15 +80,35 @@ public class Client {
                     mBufferOut.println(msg);
                     mBufferOut.flush();
                 }
-                if (mBufferIn != null) {
-                    String data = readServerMsg();
-                    Log.d("serverRes", data);
-                }
-               disconnect();
+
             }
         };
         Thread thread = new Thread(runnable);
         thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        String s = "";
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<String> result = es.submit(new Callable<String>() {
+            public String call() throws Exception {
+                // the other thread
+                if (message_type == 2 && mBufferIn != null)
+                    return readServerMsg();
+                return "";
+            }
+        });
+        try {
+            s = result.get();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        es.shutdown();
+        disconnect();
+        return s;
     }
 
     public String findRange(int curr_time){
