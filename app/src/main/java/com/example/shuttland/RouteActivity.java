@@ -329,7 +329,7 @@ public class RouteActivity extends AppCompatActivity {
                                     } else {
                                         data = "עומס קל";
                                     }
-                                    load_text.setText("מידת העומס המשוערת: " + data);
+                                    load_text.setText("מידת העומס: " + data);
                                 }
                             });
                         }

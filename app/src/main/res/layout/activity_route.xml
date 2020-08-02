@@ -193,7 +193,7 @@
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/apollo"
         android:padding="18dip"
-        android:text="מידת העומס:"
+        android:text="מידת העומס: עומס קל"
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="16sp"
