@@ -63,9 +63,9 @@ public class Client {
 //        }
         String isBreak= ifBreak(current_time);
         String weather_type=temp_range(weather);
-        String temp=message_type+" "+weather_type+","+day_str+","+isBreak+","+range_time;
+        String temp=message_type+","+weather_type+"\t"+day_str+"\t"+isBreak+"\t"+range_time;
         if(message_type==1) {
-            temp += "," + y;
+            temp += "\t" + y;
         }
         final String msg=temp;
         Runnable runnable = new Runnable() {
