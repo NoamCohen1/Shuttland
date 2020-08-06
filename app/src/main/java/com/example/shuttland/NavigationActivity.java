@@ -44,7 +44,6 @@ public class NavigationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFireBase = FirebaseDatabase.getInstance();
         myRef = mFireBase.getReference("shuttles");

@@ -51,7 +51,7 @@ public class RouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // shouldUseLayoutRtl();
         setContentView(R.layout.activity_route);
-        client=new Client();
+        client = new Client();
         Bundle bundle = getIntent().getExtras();
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
@@ -303,25 +303,28 @@ public class RouteActivity extends AppCompatActivity {
         return (to > from && t >= from && t <= to || to < from && (t >= from || t <= to));
     }
 
-    public void findWeather(final int type_message, final String y){
-  //      final TextView t1 = (TextView)findViewById(R.id.gal);
+    public void findWeather(final int type_message, final String y) {
+        //      final TextView t1 = (TextView)findViewById(R.id.gal);
         String key = "7bbeff127d7275e0bdab8ad3a6220fb1";
-        String location="lat="+userLocation.getLatitude()+"&lon="+userLocation.getLongitude();
-        String url = "https://api.openweathermap.org/data/2.5/weather?"+location+"&appid="+key;
+        String location = "lat=" + userLocation.getLatitude() + "&lon=" + userLocation.getLongitude();
+        String url = "https://api.openweathermap.org/data/2.5/weather?" + location + "&appid=" + key;
         JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject main_obj = response.getJSONObject("main");
                     String temp = String.valueOf(main_obj.getDouble("feels_like"));
-                    final int weather=convart_celsius(temp);
+                    final int weather = convart_celsius(temp);
 
                     Thread th = new Thread(new Runnable() {
                         public void run() {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    String data = client.sendMessage(type_message,weather,y);
+                                    String data = client.sendMessage(type_message, weather, y);
+                                    if (data.isEmpty()) {
+                                        return;
+                                    }
                                     if (data.equals("empty")) {
                                         data = "אין";
                                     } else if (data.equals("crowded")) {
@@ -339,7 +342,7 @@ public class RouteActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        },new Response.ErrorListener(){
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
@@ -350,15 +353,15 @@ public class RouteActivity extends AppCompatActivity {
         queue.add(jor);
     }
 
-    public int convart_celsius(String weather){
+    public int convart_celsius(String weather) {
         double temp_int = Double.parseDouble(weather);
-        double centi = temp_int-273.15;
+        double centi = temp_int - 273.15;
         centi = Math.round(centi);
-        return (int)centi;
+        return (int) centi;
     }
 
 
-    public void openDialog(){
+    public void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("מהי רמת העומס?");
         builder.setMessage("         ");
@@ -367,19 +370,19 @@ public class RouteActivity extends AppCompatActivity {
         builder.setPositiveButton("עמוס", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-               findWeather(1,"crowded");
+                findWeather(1, "crowded");
             }
         });
         builder.setNegativeButton("עמוס למחצה", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                findWeather(1,"not crowded");
+                findWeather(1, "not crowded");
             }
         });
         builder.setNeutralButton("פנוי", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                findWeather(1,"empty");
+                findWeather(1, "empty");
             }
         });
 
@@ -394,11 +397,8 @@ public class RouteActivity extends AppCompatActivity {
 
     }
 
-    public void wait_for_response(){
 
-    }
-
-    }
+}
 
 
 

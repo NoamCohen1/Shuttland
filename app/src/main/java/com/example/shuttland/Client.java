@@ -18,15 +18,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Client {
-    String ip = "52.201.126.29";
+    private String ip = "52.201.126.29";
    // String ip = "10.0.2.2"; //without cloud
-    int port = 3001;
-    PrintWriter mBufferOut;
-    BufferedReader mBufferIn;
-    Socket socket;
-    Thread connect_thread;
+    private int port = 3001;
+    private PrintWriter mBufferOut;
+    private BufferedReader mBufferIn;
+    private Socket socket;
+    private Thread connect_thread;
 
-    public void Connect() {
+    private void Connect() {
         Runnable runable = new Runnable(){
             @Override
             public void run(){
