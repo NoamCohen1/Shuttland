@@ -1,9 +1,9 @@
 package com.example.shuttland;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -44,6 +44,7 @@ public class RouteActivity extends AppCompatActivity {
     private Client client;
     private TextView load_text;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class RouteActivity extends AppCompatActivity {
         findWeather(2, "");
         TextView dest_text = (TextView) findViewById(R.id.dest);
         dest_text.setText("       בניין " + selectedBuilding);
+
 
         Location ans_near = model.findNearestStation(userLocation);
         if (ans_near.getProvider().equals("0"))
@@ -199,6 +201,7 @@ public class RouteActivity extends AppCompatActivity {
     /**
      * checks if it is the activity time and update the message accordingly
      */
+    @SuppressLint("SetTextI18n")
     public void updateMsg(int time) {
         TextView timeText = (TextView) findViewById(R.id.timeShuttle);
         Date date = new Date();
@@ -207,12 +210,12 @@ public class RouteActivity extends AppCompatActivity {
         int day = c.get(Calendar.DAY_OF_WEEK);
 
         if ((day == 7) || (day == 6 && !validTime(BEGIN_HOUR, END_HOUR_FRIDAY, c))) {
-            timeText.setText("השאטל הבא יצא ביום ראשון ב-7:30 בבוקר");
+            timeText.setText(R.string.next_shuttle_sunday);
             return;
         }
 
         if (!validTime(BEGIN_HOUR, END_HOUR, c)) {
-            timeText.setText("השאטל הבא יצא ב-7:30 בבוקר");
+            timeText.setText(R.string.next_shuttle_morning);
             return;
         }
 
@@ -226,6 +229,7 @@ public class RouteActivity extends AppCompatActivity {
     /**
      * checks if it is the activity time of the access shuttle and update the message accordingly
      */
+    @SuppressLint("SetTextI18n")
     public void updateMsgForAccess(int time) {
         TextView timeText = (TextView) findViewById(R.id.accessShuttle);
         Date date = new Date();
@@ -306,6 +310,7 @@ public class RouteActivity extends AppCompatActivity {
                     Thread th = new Thread(new Runnable() {
                         public void run() {
                             runOnUiThread(new Runnable() {
+                                @SuppressLint("SetTextI18n")
                                 @Override
                                 public void run() {
                                     String data = client.sendMessage(type_message, weather, y);

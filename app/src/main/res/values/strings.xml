@@ -8,6 +8,11 @@
     <string name="current_place">מיקומך הנוכחי</string>
     <string name="sunday_thursday">א–ה בשעות 7:30–20:00</string>
     <string name="friday">ו בשעות 7:30–13:00</string>
+    <string name="next_shuttle_sunday">השאטל הבא יצא ביום ראשון ב-7:30 בבוקר</string>
+    <string name="next_shuttle_morning">השאטל הבא יצא ב-7:30 בבוקר</string>
+
+
+
 
     <string-array name="building_array">
         <item> </item>
