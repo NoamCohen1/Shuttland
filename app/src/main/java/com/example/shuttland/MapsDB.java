@@ -1,5 +1,6 @@
 package com.example.shuttland;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 
 import java.util.ArrayList;
@@ -12,16 +13,13 @@ public class MapsDB {
 
     private List<Float> distance_of_station = new ArrayList<>();
     private List<Location> stations = new ArrayList<>();
+    @SuppressLint("UseSparseArrays")
     private Map<Integer, String> accessTime = new HashMap<>();
-
-    public Map<Integer, Integer> getBuilding_to_near_station() {
-        return building_to_near_station;
-    }
-
     private Map<Integer, Integer> building_to_near_station;
     private Map<Integer, Location> location_buildings;
     private static MapsDB single_instance = null;
 
+    @SuppressLint("UseSparseArrays")
     private MapsDB() {
         SetStationsLocations();
         setStationsDistances();
@@ -32,8 +30,12 @@ public class MapsDB {
         setAccessTime();
     }
 
-    // static method to create instance of Singleton class
-    public static MapsDB getInstance() {
+    /**
+     * static method to create instance of Singleton class
+     *
+     * @return instance
+     */
+    static MapsDB getInstance() {
         if (single_instance == null) {
             single_instance = new MapsDB();
         }
@@ -41,15 +43,19 @@ public class MapsDB {
         return single_instance;
     }
 
-    public Map<Integer, Location> getLocation_buildings() {
-        return location_buildings;
+    Map<Integer, Integer> getBuilding_to_near_station() {
+        return building_to_near_station;
     }
 
-    public void setStationsDistances() {
+
+    /**
+     * list indicate the distance between neighbored station
+     */
+    private void setStationsDistances() {
         // 0->1
         distance_of_station.add(Float.valueOf("127"));
         //1->2
-        distance_of_station.add( Float.valueOf("200"));
+        distance_of_station.add(Float.valueOf("200"));
         // 2->3
         distance_of_station.add(Float.valueOf("279"));
         // 3->4
@@ -81,20 +87,12 @@ public class MapsDB {
         // 16->0
         distance_of_station.add(Float.valueOf("168"));
 
-        //for checking
-//         //0->1
-//        distance_of_station.add(Float.valueOf("140"));
-//        //1->2
-//        distance_of_station.add( Float.valueOf("160"));
-//        // 2->3
-//        distance_of_station.add(Float.valueOf("300"));
-//        // 3->4
-//        distance_of_station.add(Float.valueOf("120"));
-
-
     }
 
-    public void setLocation_buildings(){
+    /**
+     * map from num building to location point (lat, lon)
+     */
+    private void setLocation_buildings() {
         location_buildings.put(100, createLocation("100", 32.065704, 34.840879));
         location_buildings.put(101, createLocation("101", 32.065874, 34.840133));
         location_buildings.put(102, createLocation("102", 32.065997, 34.840855));
@@ -121,14 +119,14 @@ public class MapsDB {
         location_buildings.put(215, createLocation("215", 32.067838, 34.841123));
         location_buildings.put(216, createLocation("216", 32.068687, 34.842063));
         location_buildings.put(217, createLocation("217", 32.069239, 34.842098));
-        location_buildings.put(300, createLocation("300", 32.066438, 34.843774)); // לא מדוייק
+        location_buildings.put(300, createLocation("300", 32.066438, 34.843774));
         location_buildings.put(301, createLocation("301", 32.066496, 34.843614));
-        location_buildings.put(302, createLocation("302", 32.06626355141027, 34.84452401498103)); // לא מדוייק
-        location_buildings.put(303, createLocation("303", 32.0667272726008, 34.84461134180776)); // לא מדוייק
-        location_buildings.put(304, createLocation("304", 32.067390,34.842928));
+        location_buildings.put(302, createLocation("302", 32.06626355141027, 34.84452401498103));
+        location_buildings.put(303, createLocation("303", 32.0667272726008, 34.84461134180776));
+        location_buildings.put(304, createLocation("304", 32.067390, 34.842928));
         location_buildings.put(305, createLocation("305", 32.067045, 34.844349));
         location_buildings.put(306, createLocation("306", 32.067731, 34.844231));
-        location_buildings.put(307, createLocation("307", 32.06736328654893, 34.84280928506419));//לא מדוייק
+        location_buildings.put(307, createLocation("307", 32.06736328654893, 34.84280928506419));
         location_buildings.put(401, createLocation("402", 32.068104, 34.843273));
         location_buildings.put(402, createLocation("402", 32.068104, 34.843273));
         location_buildings.put(403, createLocation("403", 32.068425, 34.843126));
@@ -137,41 +135,41 @@ public class MapsDB {
         location_buildings.put(406, createLocation("406", 32.068312, 34.844800));
         location_buildings.put(407, createLocation("407", 32.068718, 34.844801));
         location_buildings.put(408, createLocation("408", 32.068973, 34.842631));
-        location_buildings.put(409, createLocation("409", 32.069233, 34.842787));//לא מדוייק
+        location_buildings.put(409, createLocation("409", 32.069233, 34.842787));
         location_buildings.put(410, createLocation("410", 32.069123, 34.843674));
         location_buildings.put(411, createLocation("411", 32.068930, 34.844232));
         location_buildings.put(501, createLocation("501", 32.069910, 34.842495));
         location_buildings.put(502, createLocation("502", 32.070693, 34.843264));
-        location_buildings.put(503, createLocation("503", 32.06972687050898, 34.84347663279368));//לא מדוייק
+        location_buildings.put(503, createLocation("503", 32.06972687050898, 34.84347663279368));
         location_buildings.put(504, createLocation("504", 32.069888, 34.844179));
         location_buildings.put(505, createLocation("505", 32.070525, 34.844453));
         location_buildings.put(506, createLocation("506", 32.070866, 34.844837));
         location_buildings.put(507, createLocation("507", 32.071138, 34.844493));
         location_buildings.put(508, createLocation("508", 32.071356, 34.843863));
-        location_buildings.put(509, createLocation("509", 32.06972687050898, 34.84347663279368));// לא מדוייק
-        location_buildings.put(604,createLocation("604", 32.070314, 34.843767));
-        location_buildings.put(605,createLocation("605", 32.070399, 34.843492));
-        location_buildings.put(801,createLocation("801",32.071479, 34.844267));
-        location_buildings.put(802,createLocation("802",32.072109, 34.844672));
-        location_buildings.put(901,createLocation("901", 32.073178, 34.845940));
-        location_buildings.put(902,createLocation("902", 32.073069, 34.846144));
-        location_buildings.put(905,createLocation("905", 32.073379, 34.845569));
-        location_buildings.put(906,createLocation("906", 32.07316932769866, 34.84633573665613));//לא מדוייק
-        location_buildings.put(1002,createLocation("1002", 32.073830, 34.846781));
-        location_buildings.put(1004,createLocation("1004", 32.074129, 34.847459));
-        location_buildings.put(1005,createLocation("1005", 32.074205, 34.847726));
-        location_buildings.put(1102,createLocation("1102", 32.073480, 34.848892));
-        location_buildings.put(1103,createLocation("1103", 32.073345, 34.849095));
-        location_buildings.put(1104,createLocation("1104", 32.073186, 34.849227));
-        location_buildings.put(1105,createLocation("1105", 32.073000, 34.849446));
-        location_buildings.put(1401,createLocation("1401", 32.071568, 34.846642));
-        location_buildings.put(1501,createLocation("1501", 32.072930, 34.848366));
-        //location_buildings.put(1502,createLocation());
-
-
+        location_buildings.put(509, createLocation("509", 32.06972687050898, 34.84347663279368));
+        location_buildings.put(604, createLocation("604", 32.070314, 34.843767));
+        location_buildings.put(605, createLocation("605", 32.070399, 34.843492));
+        location_buildings.put(801, createLocation("801", 32.071479, 34.844267));
+        location_buildings.put(802, createLocation("802", 32.072109, 34.844672));
+        location_buildings.put(901, createLocation("901", 32.073178, 34.845940));
+        location_buildings.put(902, createLocation("902", 32.073069, 34.846144));
+        location_buildings.put(905, createLocation("905", 32.073379, 34.845569));
+        location_buildings.put(906, createLocation("906", 32.07316932769866, 34.84633573665613));
+        location_buildings.put(1002, createLocation("1002", 32.073830, 34.846781));
+        location_buildings.put(1004, createLocation("1004", 32.074129, 34.847459));
+        location_buildings.put(1005, createLocation("1005", 32.074205, 34.847726));
+        location_buildings.put(1102, createLocation("1102", 32.073480, 34.848892));
+        location_buildings.put(1103, createLocation("1103", 32.073345, 34.849095));
+        location_buildings.put(1104, createLocation("1104", 32.073186, 34.849227));
+        location_buildings.put(1105, createLocation("1105", 32.073000, 34.849446));
+        location_buildings.put(1401, createLocation("1401", 32.071568, 34.846642));
+        location_buildings.put(1501, createLocation("1501", 32.072930, 34.848366));
     }
 
-    public void SetStationsLocations() {
+    /**
+     * map from station to location point (lat,lon).
+     */
+    private void SetStationsLocations() {
         addLocation("0", 32.0727493, 34.849301);
         addLocation("1", 32.0734411, 34.8483981);
         addLocation("2", 32.0735301, 34.846368);
@@ -190,7 +188,7 @@ public class MapsDB {
         addLocation("15", 32.073458699999996, 34.8459821);
         addLocation("16", 32.072267499999995, 34.8480397);
 
-        //for checking
+        //for testing
 //        //ליפשיץ פינת הפרדס
 //        addLocation("0", 32.076458, 34.874041);
 //        //ניגוני חיים
@@ -203,9 +201,10 @@ public class MapsDB {
 //        addLocation("4", 32.074879, 34.868378);
     }
 
-    public void setBuildingToNearStation() {
-        //for checking
-        //building_to_near_station.put(100, 4);
+    /**
+     * Map from building to the nearest station (according to preliminary calculation)
+     */
+    private void setBuildingToNearStation() {
         building_to_near_station.put(100, 8);
         building_to_near_station.put(101, 7);
         building_to_near_station.put(102, 7);
@@ -262,28 +261,27 @@ public class MapsDB {
         building_to_near_station.put(509, 14);
         building_to_near_station.put(604, 11);
         building_to_near_station.put(605, 11);
-        building_to_near_station.put(801, 14); //3 - depend from where he come from? *
-        building_to_near_station.put(802, 14); //*3
-        building_to_near_station.put(901, 15); //*2
-        building_to_near_station.put(902, 15); //*2
-        building_to_near_station.put(905, 15); //*2
-        building_to_near_station.put(906, 15); //*2
-        building_to_near_station.put(1002, 15); //*2
-        building_to_near_station.put(1004, 15); //*2
-        building_to_near_station.put(1005, 15); //*2
+        building_to_near_station.put(801, 14);
+        building_to_near_station.put(802, 14);
+        building_to_near_station.put(901, 15);
+        building_to_near_station.put(902, 15);
+        building_to_near_station.put(905, 15);
+        building_to_near_station.put(906, 15);
+        building_to_near_station.put(1002, 15);
+        building_to_near_station.put(1004, 15);
+        building_to_near_station.put(1005, 15);
         building_to_near_station.put(1102, 0);
         building_to_near_station.put(1103, 0);
         building_to_near_station.put(1104, 0);
         building_to_near_station.put(1105, 0);
         building_to_near_station.put(1401, 16);
         building_to_near_station.put(1501, 16);
-        building_to_near_station.put(1502, 15); //*2
-
+        building_to_near_station.put(1502, 15); 
 
 
     }
 
-    public void setAccessTime(){
+    public void setAccessTime() {
         accessTime.put(730, "7:30");
         accessTime.put(745, "7:45");
         accessTime.put(845, "8:45");
@@ -310,12 +308,14 @@ public class MapsDB {
         location.setLongitude(lon);
         stations.add(location);
     }
+
     public Location createLocation(String name, double lat, double lon) {
         Location location = new Location(name);
         location.setLatitude(lat);
         location.setLongitude(lon);
         return location;
-}
+    }
+
     public List<Location> getStations() {
         return stations;
     }

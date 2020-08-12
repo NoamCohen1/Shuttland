@@ -17,19 +17,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Client {
+class Client {
     private String ip = "52.201.126.29";
-   // String ip = "10.0.2.2"; //without cloud
+    // String ip = "10.0.2.2"; //emulator ip- for testing
     private int port = 3001;
     private PrintWriter mBufferOut;
     private BufferedReader mBufferIn;
     private Socket socket;
     private Thread connect_thread;
 
+    // connect to Server
     private void Connect() {
-        Runnable runable = new Runnable(){
+        Runnable runable = new Runnable() {
             @Override
-            public void run(){
+            public void run() {
 
                 try {
                     InetAddress serverAddr = InetAddress.getByName(ip);
@@ -47,36 +48,45 @@ public class Client {
         connect_thread = new Thread(runable);
         connect_thread.start();
     }
-    public String sendMessage(final int message_type, int weather, String y){
+
+    /**
+     * Create the request for the server, according the current information of the user.
+     * @param message_type - 1: user overloading reporting , 2: user request for prediction.
+     * @param weather - weather in celsius degree.
+     * @param y - in case of message type 1- prediction from user.
+     * @return Prediction from Server
+     */
+    String sendMessage(final int message_type, int weather, String y) {
         Connect();
-        Date date=new Date();
-        String data = "";
+        Date date = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
         int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
-        String range_time=findRange(current_time);
-        String day_str=convertDay(day);
-//        if(range_time.equals("invalid time")|| day_str.equals("invalid time")){
-//            disconnect();
-//            return;
-//        }
-        String isBreak= ifBreak(current_time);
-        String weather_type=temp_range(weather);
-        String temp=message_type+","+weather_type+"\t"+day_str+"\t"+isBreak+"\t"+range_time;
-        if(message_type==1) {
+        String range_time = findRange(current_time);
+        String day_str = convertDay(day);
+        if(range_time.equals("invalid time")|| day_str.equals("invalid time")){
+            disconnect();
+            return "";
+        }
+        String isBreak = ifBreak(current_time);
+        String weather_type = temp_range(weather);
+        String temp = message_type + "," + weather_type + "\t" + day_str + "\t" + isBreak + "\t" + range_time;
+        if (message_type == 1) {
             temp += "\t" + y;
         }
-        final String msg=temp;
+        final String msg = temp;
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try {
+                    // waiting for the connection
                     connect_thread.join();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if (mBufferOut != null) {
+                    // send message to the server
                     mBufferOut.println(msg);
                     mBufferOut.flush();
                 }
@@ -102,6 +112,7 @@ public class Client {
             }
         });
         try {
+            // enter to block until the response from the server arrive.
             s = result.get();
         } catch (Exception e) {
             e.getStackTrace();
@@ -111,68 +122,79 @@ public class Client {
         return s;
     }
 
-    public String findRange(int curr_time){
-       if(curr_time>730&& curr_time<930)
-           return "7:30-9:30";
-        if(curr_time>930&& curr_time<1130)
+    /**
+     * Convert from int time to range of hours
+     * @param curr_time - current time
+     * @return range time
+     */
+    private String findRange(int curr_time) {
+        if (curr_time > 730 && curr_time < 930)
+            return "7:30-9:30";
+        if (curr_time > 930 && curr_time < 1130)
             return "9:30-11:30";
-        if(curr_time>1130&& curr_time<1330)
+        if (curr_time > 1130 && curr_time < 1330)
             return "11:30-13:30";
-        if(curr_time>1330&& curr_time<1530)
+        if (curr_time > 1330 && curr_time < 1530)
             return "13:30-15:30";
-        if(curr_time>1530&& curr_time<1730)
+        if (curr_time > 1530 && curr_time < 1730)
             return "15:30-17:30";
-        if(curr_time>1730&& curr_time<2030)
+        if (curr_time > 1730 && curr_time < 2030)
             return "17:30-20:30";
         return "invalid time";
     }
 
-    public String convertDay(int day){
-        if(day==1){
+
+    private String convertDay(int day) {
+        if (day == 1) {
             return "sunday";
         }
-        if(day==2){
+        if (day == 2) {
             return "monday";
         }
-        if(day==3){
+        if (day == 3) {
             return "tuesday";
         }
-        if(day==4){
+        if (day == 4) {
             return "wednesday";
         }
-        if(day==5){
+        if (day == 5) {
             return "thursday";
         }
-        if(day==6){
+        if (day == 6) {
             return "friday";
         }
-       return "invalid time";
+        return "invalid time";
     }
 
-    public String ifBreak (int curr_time){
-        if((curr_time>730&& curr_time<800)||(curr_time>830&& curr_time<900)
-            ||(curr_time>930&& curr_time<1000) || (curr_time>1130&& curr_time<1200)
-            || (curr_time>1330&& curr_time<1400) || (curr_time>1530&& curr_time<1600))
+    /**
+     * Check if the current time ib break time
+     * @param curr_time - current time
+     * @return is break
+     */
+    private String ifBreak(int curr_time) {
+        if ((curr_time > 730 && curr_time < 800) || (curr_time > 830 && curr_time < 900)
+                || (curr_time > 930 && curr_time < 1000) || (curr_time > 1130 && curr_time < 1200)
+                || (curr_time > 1330 && curr_time < 1400) || (curr_time > 1530 && curr_time < 1600))
             return "yes";
 
         return "no";
     }
 
-    public String temp_range(int temp){
-        if(temp<17){
+    private String temp_range(int temp) {
+        if (temp < 17) {
             return "rainy";
         }
-        if(temp<22){
+        if (temp < 22) {
             return "overcast";
         }
-        if(temp<29){
+        if (temp < 29) {
             return "nice";
         }
         return "sunny";
     }
 
-    public void disconnect() {
-        if(this.socket!=null) {
+    private void disconnect() {
+        if (this.socket != null) {
             try {
                 this.socket.close();
                 this.mBufferOut.close();
@@ -183,7 +205,7 @@ public class Client {
         }
     }
 
-    public String readServerMsg() {
+    private String readServerMsg() {
         String data = "";
         if (socket.isConnected()) {
             try {
