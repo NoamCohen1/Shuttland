@@ -45,7 +45,7 @@ public class NavigationModel {
         if (counter > numStation)
             return Float.MAX_VALUE;
         for (int i = counter; i < numStation; i++) {
-            distance += MapsDB.getInstance().getdistance_of_station().get(i);
+            distance += MapsDB.getInstance().getDistanceOfStation().get(i);
         }
         return distance;
     }
@@ -58,7 +58,7 @@ public class NavigationModel {
         if (nearest_station_name > numStation)
             return Float.MAX_VALUE;
         for (int i = nearest_station_name; i < numStation; i++) {
-            distance += MapsDB.getInstance().getdistance_of_station().get(i);
+            distance += MapsDB.getInstance().getDistanceOfStation().get(i);
         }
         return distance;
     }

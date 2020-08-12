@@ -170,23 +170,24 @@ public class MapsDB {
      * map from station to location point (lat,lon).
      */
     private void SetStationsLocations() {
-        addLocation("0", 32.0727493, 34.849301);
-        addLocation("1", 32.0734411, 34.8483981);
-        addLocation("2", 32.0735301, 34.846368);
-        addLocation("3", 32.0723118, 34.844318799999996);
-        addLocation("4", 32.071165199999996, 34.8429532);
-        addLocation("5", 32.069904, 34.8420564);
-        addLocation("6", 32.0681564, 34.840918099999996);
-        addLocation("7", 32.0671975, 34.840333699999995);
-        addLocation("8", 32.0655436, 34.8424443);
-        addLocation("9", 32.0659431, 34.844034199999996);
-        addLocation("10", 32.0673506, 34.8446212);
-        addLocation("11", 32.069542, 34.8438793);
-        addLocation("12", 32.0695559, 34.8423678);
-        addLocation("13", 32.0711751, 34.8430622);
-        addLocation("14", 32.0722382, 34.8445136);
-        addLocation("15", 32.073458699999996, 34.8459821);
-        addLocation("16", 32.072267499999995, 34.8480397);
+        stations.add(createLocation("0", 32.0727493, 34.849301));
+        stations.add(createLocation("1", 32.0734411, 34.8483981));
+        stations.add(createLocation("2", 32.0735301, 34.846368));
+        stations.add(createLocation("3", 32.0723118, 34.844318799999996));
+        stations.add(createLocation("4", 32.071165199999996, 34.8429532));
+        stations.add(createLocation("5", 32.069904, 34.8420564));
+        stations.add(createLocation("6", 32.0681564, 34.840918099999996));
+        stations.add(createLocation("7", 32.0671975, 34.840333699999995));
+        stations.add(createLocation("8", 32.0655436, 34.8424443));
+        stations.add(createLocation("9", 32.0659431, 34.844034199999996));
+        stations.add(createLocation("10", 32.0673506, 34.8446212));
+        stations.add(createLocation("11", 32.069542, 34.8438793));
+        stations.add(createLocation("12", 32.0695559, 34.8423678));
+        stations.add(createLocation("13", 32.0711751, 34.843062));
+        stations.add(createLocation("14", 32.0722382, 34.8445136));
+        stations.add(createLocation("15", 32.073458699999996, 34.8459821));
+        stations.add(createLocation("16", 32.072267499999995, 34.8480397));
+
 
         //for testing
 //        //ליפשיץ פינת הפרדס
@@ -276,12 +277,13 @@ public class MapsDB {
         building_to_near_station.put(1105, 0);
         building_to_near_station.put(1401, 16);
         building_to_near_station.put(1501, 16);
-        building_to_near_station.put(1502, 15); 
-
-
+        building_to_near_station.put(1502, 15);
     }
 
-    public void setAccessTime() {
+    /**
+     * time of access shuttle- from int to string.
+     */
+    private void setAccessTime() {
         accessTime.put(730, "7:30");
         accessTime.put(745, "7:45");
         accessTime.put(845, "8:45");
@@ -298,33 +300,34 @@ public class MapsDB {
     }
 
 
-    public Map<Integer, String> getAccessTime() {
+    Map<Integer, String> getAccessTime() {
         return accessTime;
     }
 
-    public void addLocation(String name, double lat, double lon) {
-        Location location = new Location(name);
-        location.setLatitude(lat);
-        location.setLongitude(lon);
-        stations.add(location);
-    }
 
-    public Location createLocation(String name, double lat, double lon) {
+    /**
+     *  Create location from two double.
+     * @param name - provider of the location
+     * @param lat - latitude
+     * @param lon - longitude
+     * @return location point
+     */
+    private Location createLocation(String name, double lat, double lon) {
         Location location = new Location(name);
         location.setLatitude(lat);
         location.setLongitude(lon);
         return location;
     }
 
-    public List<Location> getStations() {
+    List<Location> getStations() {
         return stations;
     }
 
-    public List<Float> getdistance_of_station() {
+    List<Float> getDistanceOfStation() {
         return distance_of_station;
     }
 
-    public Location getSpecificBuildingLocation(int buildingNum) {
+    Location getSpecificBuildingLocation(int buildingNum) {
         return location_buildings.get(buildingNum);
     }
 }
