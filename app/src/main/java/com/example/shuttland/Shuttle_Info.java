@@ -2,6 +2,9 @@ package com.example.shuttland;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * class represent shuttle data - location, isActive
+ */
 public class Shuttle_Info {
     private LatLng location;
     private boolean isActive;
@@ -28,16 +31,8 @@ public class Shuttle_Info {
         return location;
     }
 
-    public void setLocation(LatLng location) {
-        this.location = location;
-    }
-
     public boolean isActive() {
         return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
     public void setCounter(int counter) {
@@ -47,6 +42,7 @@ public class Shuttle_Info {
     public int getCounter() {
         return counter;
     }
+
     public void increaseCounter(){
        this.counter++;
     }

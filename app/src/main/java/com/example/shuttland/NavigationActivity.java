@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -34,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 public class NavigationActivity extends AppCompatActivity {
     FirebaseDatabase mFireBase;
     DatabaseReference myRef;
-    private NavigationModel model;
     Location userLocation = new Location("user");
     int selectedBuilding;
     ArrayAdapter<CharSequence> arrayAdapter;
@@ -42,25 +40,21 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //shouldUseLayoutRtl();
         setContentView(R.layout.activity_navigation);
 
         mFireBase = FirebaseDatabase.getInstance();
         myRef = mFireBase.getReference("shuttles");
 
-
         userLocation = getUserLocation();
-        //for checking
-//        userLocation = new Location("user");
-////        userLocation.setLatitude(32.074879);
-////        userLocation.setLongitude(34.868378);
-
 
         final Button goButton = (Button) findViewById(R.id.goButton);
+        /**
+         * search button - assign the user location
+         */
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedBuilding==0) {  // the user not choose building
+                if(selectedBuilding==0) {  // in case the user dont choose building
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -81,12 +75,12 @@ public class NavigationActivity extends AppCompatActivity {
                     });
 
                 }else {
-                    openRootActivity();
+                    openRouteActivity();
                 }
             }
         });
 
-        // Create an ArrayAdapter using the string array and a default spinner
+        // Create an ArrayAdapter using the building string array and a default spinner
         arrayAdapter = ArrayAdapter
                 .createFromResource(this, R.array.building_array,
                         android.R.layout.simple_spinner_item);
@@ -98,6 +92,9 @@ public class NavigationActivity extends AppCompatActivity {
         autoComplete.setAdapter(arrayAdapter);
         autoComplete.setDropDownBackgroundDrawable(getResources().getDrawable(R.drawable.gradient1));
 
+        /**
+         * building list click definition - assign the selected building
+         */
         autoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long rowId) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(view.getContext().INPUT_METHOD_SERVICE);
@@ -121,6 +118,9 @@ public class NavigationActivity extends AppCompatActivity {
         });
 
 
+        /**
+         * show all option to buildings
+         */
         ImageView dropDown = (ImageView) findViewById(R.id.drop_down_img);
         dropDown.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,12 +129,11 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
 
-        this.model=new NavigationModel();
-        //writeToDB();
         readFromDB();
     }
 
 
+    //get user location - lon, lat
     public Location getUserLocation() {
         checkPermission();
 
@@ -182,6 +181,9 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * read data from firebase and update the map of shuttle location according the data we receive
+     */
     public void readFromDB() {
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -209,7 +211,7 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
     }
-    public void openRootActivity() {
+    public void openRouteActivity() {
         Intent intent = new Intent(this, RouteActivity.class);
         Bundle bundle = new Bundle();
         bundle.putDouble("lat",userLocation.getLatitude());
@@ -217,16 +219,6 @@ public class NavigationActivity extends AppCompatActivity {
         bundle.putInt("numBuilding",selectedBuilding);
         intent.putExtras(bundle);
         startActivity(intent);
-    }
-    private boolean shouldUseLayoutRtl() {
-        Configuration config = getResources().getConfiguration();
-        if (android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-
-        } else {
-            return false;
-        }
     }
 
     public void hideKeyboard(View view) {
