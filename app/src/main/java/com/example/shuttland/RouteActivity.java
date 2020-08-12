@@ -35,8 +35,6 @@ public class RouteActivity extends AppCompatActivity {
     private static final int BEGIN_HOUR = 730; //7:30
     private static final int END_HOUR = 2000;
     private static final int END_HOUR_FRIDAY = 1300;
-
-
     Location userLocation = new Location("user");
     int selectedBuilding;
     boolean isAccess = false;
@@ -53,17 +51,15 @@ public class RouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_route);
         client = new Client();
         Bundle bundle = getIntent().getExtras();
+        assert bundle != null;
         userLocation.setLongitude(bundle.getDouble("lon"));
         userLocation.setLatitude(bundle.getDouble("lat"));
         selectedBuilding = bundle.getInt("numBuilding");
-
         load_text = (TextView) findViewById(R.id.shuttleLoad);
-
+        // get overload prediction from the server
         findWeather(2, "");
-
         TextView dest_text = (TextView) findViewById(R.id.dest);
         dest_text.setText("       בניין " + selectedBuilding);
-
 
         Location ans_near = model.findNearestStation(userLocation);
         if (ans_near.getProvider().equals("0"))
@@ -72,13 +68,11 @@ public class RouteActivity extends AppCompatActivity {
         int final_station = MapsDB.getInstance().getBuilding_to_near_station().get(selectedBuilding);
         final Location final_station_location = MapsDB.getInstance().getStations().get(final_station);
 
-
         TextView src_station = (TextView) findViewById(R.id.srcStation);
         src_station.setText("לך אל תחנה " + userStation.getProvider());
 
         TextView dst_building = (TextView) findViewById(R.id.targetBuilding);
         dst_building.setText("לך אל בניין " + selectedBuilding);
-
 
         Button button = (Button) findViewById(R.id.navigateBtn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +98,10 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
 
-
         final ImageView accessBtn = (ImageView) findViewById(R.id.accessBtn);
         final TextView accessTime = (TextView) findViewById(R.id.accessShuttle);
         final TextView regularTime = (TextView) findViewById(R.id.timeShuttle);
+        // when click on access button call the function that compute the time of the access shuttle
         accessBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,10 +141,9 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
 
-
         final int nearsetShuttle = model.findNearestShuttle(userStation, isAccess);
         final Location userStationTemp = userStation;
-
+        // compute the arriving time of the shuttle
         Thread th = new Thread(new Runnable() {
             public void run() {
                 while (true) {
@@ -171,24 +164,14 @@ public class RouteActivity extends AppCompatActivity {
             }
         });
         th.start();
-
-
         TextView destText = (TextView) findViewById(R.id.targetStation);
         destText.setText("סע עד תחנה " + final_station);
 
     }
 
-    private boolean shouldUseLayoutRtl() {
-        Configuration config = getResources().getConfiguration();
-        if (android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-
-        } else {
-            return false;
-        }
-    }
-
+    /**
+     * finds the nearest shuttle and calculate the arriving time of this shuttle
+     */
     public int updateTime(boolean isAccess, int nearsetShuttle, Location userStationTemp, Location userStation) {
         int time = 0;
         boolean is_find_shuttle = true;
@@ -213,12 +196,12 @@ public class RouteActivity extends AppCompatActivity {
         return time;
     }
 
+    /**
+     * checks if it is the activity time and update the message accordingly
+     */
     public void updateMsg(int time) {
         TextView timeText = (TextView) findViewById(R.id.timeShuttle);
-
         Date date = new Date();
-//                            String day = String.format("%E", date ).toLowerCase();
-
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
@@ -240,13 +223,12 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * checks if it is the activity time of the access shuttle and update the message accordingly
+     */
     public void updateMsgForAccess(int time) {
         TextView timeText = (TextView) findViewById(R.id.accessShuttle);
-        // timeText.setVisibility(View.VISIBLE);
-
         Date date = new Date();
-//                            String day = String.format("%E", date ).toLowerCase();
-
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
@@ -264,7 +246,6 @@ public class RouteActivity extends AppCompatActivity {
         if (time == Integer.MAX_VALUE) {
             int current_time = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
             int temp;
-            // int current_time = 1400;
             String ans = "";
             int min = Integer.MAX_VALUE;
             List<Integer> keys = new ArrayList(accessTime.keySet());
@@ -285,9 +266,10 @@ public class RouteActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * open the google maps activity
+     */
     public void openActivityNearStation(Location src, Location dest) {
-        // move parameters - nearest station, user location
-        // move back
         Intent intent = new Intent(this, MapsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putDouble("srcLat", src.getLatitude());
@@ -298,13 +280,18 @@ public class RouteActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * checks if it is in the activity time
+     */
     public Boolean validTime(int from, int to, Calendar c) {
         int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
         return (to > from && t >= from && t <= to || to < from && (t >= from || t <= to));
     }
 
+    /**
+     * use weather API to get the temp in the user location and send the message to the server via the client
+     */
     public void findWeather(final int type_message, final String y) {
-        //      final TextView t1 = (TextView)findViewById(R.id.gal);
         String key = "7bbeff127d7275e0bdab8ad3a6220fb1";
         String location = "lat=" + userLocation.getLatitude() + "&lon=" + userLocation.getLongitude();
         String url = "https://api.openweathermap.org/data/2.5/weather?" + location + "&appid=" + key;
@@ -314,7 +301,7 @@ public class RouteActivity extends AppCompatActivity {
                 try {
                     JSONObject main_obj = response.getJSONObject("main");
                     String temp = String.valueOf(main_obj.getDouble("feels_like"));
-                    final int weather = convart_celsius(temp);
+                    final int weather = convert_celsius(temp);
 
                     Thread th = new Thread(new Runnable() {
                         public void run() {
@@ -353,14 +340,19 @@ public class RouteActivity extends AppCompatActivity {
         queue.add(jor);
     }
 
-    public int convart_celsius(String weather) {
+    /**
+     * convert to celsius
+     */
+    public int convert_celsius(String weather) {
         double temp_int = Double.parseDouble(weather);
         double centi = temp_int - 273.15;
         centi = Math.round(centi);
         return (int) centi;
     }
 
-
+    /**
+     * open dialog to report shuttle overload
+     */
     public void openDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("מהי רמת העומס?");
@@ -396,8 +388,6 @@ public class RouteActivity extends AppCompatActivity {
         leftSpacer.setVisibility(View.GONE);
 
     }
-
-
 }
 
 
