@@ -52,8 +52,11 @@ public class RouteActivity extends AppCompatActivity {
         client = new Client();
         Bundle bundle = getIntent().getExtras();
         assert bundle != null;
-        userLocation.setLongitude(bundle.getDouble("lon"));
-        userLocation.setLatitude(bundle.getDouble("lat"));
+        userLocation.setLongitude(34.8438793);
+        userLocation.setLatitude(32.069542);
+        // when in University
+//        userLocation.setLongitude(bundle.getDouble("lon"));
+//        userLocation.setLatitude(bundle.getDouble("lat"));
         selectedBuilding = bundle.getInt("numBuilding");
         load_text = (TextView) findViewById(R.id.shuttleLoad);
         // get overload prediction from the server
