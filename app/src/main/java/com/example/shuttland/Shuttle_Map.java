@@ -64,8 +64,8 @@ class Shuttle_Map {
         return access_active;
     }
 
-    int getCounter(Integer key) {
-        return this.shuttle_infoMap.get(key).getCounter();
-    }
+    //int getCounter(Integer key) {
+    //    return this.shuttle_infoMap.get(key).getCounter();
+    //}
 
 }

@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -194,10 +193,10 @@ public class NavigationActivity extends AppCompatActivity {
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     String value = keyNode.getValue(String.class);
                     String[] location_point = value.split(",");
-                    int counter = Shuttle_Map.getInstance().getCounter(Integer.parseInt(keyNode.getKey()));
+//                    int counter = Shuttle_Map.getInstance().getCounter(Integer.parseInt(keyNode.getKey()));
                     Shuttle_Info info = new Shuttle_Info(new LatLng(Double.parseDouble(location_point[0]), Double.parseDouble(location_point[1]))
                             , Boolean.parseBoolean(location_point[2]));
-                    info.setCounter(counter);
+  //                  info.setCounter(counter);
                     Shuttle_Map.getInstance().setMap(Integer.parseInt(keyNode.getKey()), info);
 
                 }

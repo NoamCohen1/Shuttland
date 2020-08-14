@@ -208,6 +208,9 @@ public class RouteActivity extends AppCompatActivity {
         c.setTime(date);
         int day = c.get(Calendar.DAY_OF_WEEK);
 
+        if (time == Integer.MAX_VALUE) {
+            time = 10;
+        }
         if ((day == 7) || (day == 6 && !validTime(BEGIN_HOUR, END_HOUR_FRIDAY, c))) {
             timeText.setText(R.string.next_shuttle_sunday);
             return;
